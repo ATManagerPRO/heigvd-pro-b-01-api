@@ -16,6 +16,11 @@ class CreateTodoListsTable extends Migration
         Schema::create('todo_lists', function (Blueprint $table) {
             $table->string('title', 50)->unique();
             $table->timestamps();
+
+            // Table options
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
         });
     }
 
