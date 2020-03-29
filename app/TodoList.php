@@ -21,4 +21,12 @@ class TodoList extends Model
     {
         return $this->hasOne('App\User');
     }
+
+    /**
+     * Get todoList's folder
+     */
+    public function folder()
+    {
+        return $this->hasOne('App\Folder');
+    }
 }

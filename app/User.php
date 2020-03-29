@@ -25,4 +25,12 @@ class User extends Model
     {
         return $this->hasMany('App\TodoList');
     }
+
+    /**
+     * Get all folders of the user
+     */
+    public function folder()
+    {
+        return $this->hasMany('App\Folder');
+    }
 }
