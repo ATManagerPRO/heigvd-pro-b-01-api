@@ -20,6 +20,13 @@ class CreateGoalTodosTable extends Migration
             $table->timestamp('dateTimeDone')->nullable();
             $table->timestamps();
 
+            // Foreign keys constraints
+            // Goal deleted => goalTodo NOT deleted
+            $table->foreign('goal_id')
+                ->references('id')
+                ->on('goals')
+                ->onDelete('set null');
+
             // Table options
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';

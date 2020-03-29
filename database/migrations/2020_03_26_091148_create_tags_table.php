@@ -19,6 +19,13 @@ class CreateTagsTable extends Migration
             $table->string('label');
             $table->timestamps();
 
+            // Foreign keys constraints
+            // User deleted => tag deleted
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
             // Table options
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';

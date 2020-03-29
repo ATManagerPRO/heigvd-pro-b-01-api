@@ -23,6 +23,13 @@ class CreateGoalsTable extends Migration
             $table->unsignedInteger('intervalValue');
             $table->timestamps();
 
+            // Foreign keys constraints
+            // User deleted => goal deleted
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
             // Table options
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';

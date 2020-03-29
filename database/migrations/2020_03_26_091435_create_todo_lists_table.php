@@ -20,6 +20,19 @@ class CreateTodoListsTable extends Migration
             $table->string('title', 50);
             $table->timestamps();
 
+            // Foreign keys constraints
+            // User deleted => todoList deleted
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            // Folder deleted => todoList NOT deleted
+            $table->foreign('folder_id')
+                ->references('id')
+                ->on('folders')
+                ->onDelete('set null');
+
             // Table options
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';

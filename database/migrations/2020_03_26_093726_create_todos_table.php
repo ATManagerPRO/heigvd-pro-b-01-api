@@ -23,6 +23,13 @@ class CreateTodosTable extends Migration
             $table->dateTime('reminderDateTime')->nullable();
             $table->timestamps();
 
+            // Foreign keys constraints
+            // TodoList deleted => todos NOT deleted (for statistic purposes)
+            $table->foreign('todo_list_id')
+                ->references('id')
+                ->on('todo_lists')
+                ->onDelete('set null');
+
             // Table options
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
