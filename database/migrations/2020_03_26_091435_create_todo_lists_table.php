@@ -22,16 +22,10 @@ class CreateTodoListsTable extends Migration
 
             // Foreign keys constraints
             // User deleted => todoList deleted
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             // Folder deleted => todoList NOT deleted
-            $table->foreign('folder_id')
-                ->references('id')
-                ->on('folders')
-                ->onDelete('set null');
+            $table->foreign('folder_id')->references('id')->on('folders')->onDelete('set null');
 
             // Table options
             $table->engine = 'InnoDB';

@@ -21,14 +21,13 @@ class CreateTodosTable extends Migration
             $table->date('dueDate')->nullable();
             $table->dateTime('dateTimeDone')->nullable();
             $table->dateTime('reminderDateTime')->nullable();
+            $table->unsignedInteger('interval'); // Unit (day, week, ...)
+            $table->unsignedInteger('intervalValue'); // Amount (1,2, ...)
             $table->timestamps();
 
             // Foreign keys constraints
             // TodoList deleted => todos NOT deleted (for statistic purposes)
-            $table->foreign('todo_list_id')
-                ->references('id')
-                ->on('todo_lists')
-                ->onDelete('set null');
+            $table->foreign('todo_list_id')->references('id')->on('todo_lists')->onDelete('set null');
 
             // Table options
             $table->engine = 'InnoDB';

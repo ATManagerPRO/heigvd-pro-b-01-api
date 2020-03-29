@@ -21,10 +21,7 @@ class CreateFoldersTable extends Migration
 
             // Foreign keys constraints
             // User deleted => folder deleted
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             // Table options
             $table->engine = 'InnoDB';

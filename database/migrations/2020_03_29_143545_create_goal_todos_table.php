@@ -22,10 +22,7 @@ class CreateGoalTodosTable extends Migration
 
             // Foreign keys constraints
             // Goal deleted => goalTodo NOT deleted
-            $table->foreign('goal_id')
-                ->references('id')
-                ->on('goals')
-                ->onDelete('set null');
+            $table->foreign('goal_id')->references('id')->on('goals')->onDelete('set null');
 
             // Table options
             $table->engine = 'InnoDB';

@@ -19,16 +19,13 @@ class CreateGoalsTable extends Migration
             $table->unsignedInteger('quantity');
             $table->string('label', 50);
             $table->date('dueDate');
-            $table->unsignedInteger('interval');
-            $table->unsignedInteger('intervalValue');
+            $table->unsignedInteger('interval'); // Unit (day, week, ...)
+            $table->unsignedInteger('intervalValue'); // Amount (1,2, ...)
             $table->timestamps();
 
             // Foreign keys constraints
             // User deleted => goal deleted
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             // Table options
             $table->engine = 'InnoDB';
