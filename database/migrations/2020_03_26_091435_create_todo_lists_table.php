@@ -38,6 +38,7 @@ class CreateTodoListsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('todoList_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('permissionLevel');
             $table->timestamps();
 
             $table->unique(['todoList_id', 'user_id']);

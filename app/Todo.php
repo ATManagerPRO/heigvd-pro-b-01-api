@@ -21,4 +21,12 @@ class Todo extends Model
     {
         return $this->belongsToMany('App\Tag');
     }
+
+    /**
+     * Get the assigned user
+     */
+    public function user()
+    {
+        return $this->hasOne('App\User');
+    }
 }

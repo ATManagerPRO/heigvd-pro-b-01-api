@@ -38,4 +38,12 @@ class User extends Model
     {
         return $this->belongsToMany('App\TodoList');
     }
+
+    /**
+     * Get all the assigned todos
+     */
+    public function todo()
+    {
+        return $this->hasMany('App\Todo');
+    }
 }
