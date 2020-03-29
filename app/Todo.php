@@ -13,4 +13,12 @@ class Todo extends Model
     {
         return $this->belongsTo('App\TodoList');
     }
+
+    /**
+     * Get todo's tags
+     */
+    public function tag()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 }
