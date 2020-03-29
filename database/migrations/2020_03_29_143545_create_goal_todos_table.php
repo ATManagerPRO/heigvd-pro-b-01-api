@@ -18,6 +18,7 @@ class CreateGoalTodosTable extends Migration
             $table->unsignedBigInteger('goal_id');
             $table->integer('quantityDone')->nullable();
             $table->timestamp('dateTimeDone')->nullable();
+            $table->date('dueDate');
             $table->timestamps();
 
             // Foreign keys constraints

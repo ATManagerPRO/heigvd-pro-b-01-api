@@ -29,4 +29,12 @@ class TodoList extends Model
     {
         return $this->hasOne('App\Folder');
     }
+
+    /**
+     * Get todoList's creator
+     */
+    public function userInvited()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }

@@ -2,13 +2,10 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    use Notifiable;
 
     /**
      * Get all tags of the user
@@ -32,5 +29,13 @@ class User extends Model
     public function folder()
     {
         return $this->hasMany('App\Folder');
+    }
+
+    /**
+     * Get all todoLists the user is invited in
+     */
+    public function todoListInvited()
+    {
+        return $this->belongsToMany('App\TodoList');
     }
 }

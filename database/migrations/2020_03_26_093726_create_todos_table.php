@@ -23,6 +23,7 @@ class CreateTodosTable extends Migration
             $table->dateTime('reminderDateTime')->nullable();
             $table->unsignedInteger('interval'); // Unit (day, week, ...)
             $table->unsignedInteger('intervalValue'); // Amount (1,2, ...)
+            $table->date('intervalEndDate')->nullable();
             $table->timestamps();
 
             // Foreign keys constraints
