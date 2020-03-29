@@ -10,8 +10,19 @@ class User extends Model
 {
     use Notifiable;
 
-    public function Tag()
+    /**
+     * Get all tags of the user
+     */
+    public function tag()
     {
         return $this->hasMany('App\Tag');
+    }
+
+    /**
+     * Get all todoLists of the user
+     */
+    public function todoList()
+    {
+        return $this->hasMany('App\TodoList');
     }
 }
