@@ -15,7 +15,7 @@ class CreateTodosTable extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('todo_list_id');
+            $table->unsignedBigInteger('todoList_id');
             $table->unsignedBigInteger('user_id')->nullable(); // User who is assigned to the task
             $table->string('title', 50);
             $table->text('details')->nullable();
@@ -28,8 +28,7 @@ class CreateTodosTable extends Migration
             $table->timestamps();
 
             // Foreign keys constraints
-            // TodoList deleted => todos NOT deleted (for statistic purposes)
-            $table->foreign('todo_list_id')->references('id')->on('todo_lists')->onDelete('set null');
+            $table->foreign('todoList_id')->references('id')->on('todo_lists')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
 
             // Table options

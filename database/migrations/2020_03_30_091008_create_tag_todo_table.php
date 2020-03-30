@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGoalTodosTable extends Migration
+class CreateTagTodoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,18 @@ class CreateGoalTodosTable extends Migration
      */
     public function up()
     {
-        Schema::create('goal_todos', function (Blueprint $table) {
+        // Pivot table between tags and todos
+        Schema::create('tag_todo', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('goal_id');
-            $table->integer('quantityDone')->nullable();
-            $table->timestamp('dateTimeDone')->nullable();
-            $table->date('dueDate');
+            $table->unsignedBigInteger('tag_id');
+            $table->unsignedBigInteger('todo_id');
             $table->timestamps();
 
+            $table->unique(['tag_id', 'todo_id']);
+
             // Foreign keys constraints
-            // Goal deleted => goalTodo NOT deleted
-            $table->foreign('goal_id')->references('id')->on('goals')->onDelete('set null');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->foreign('todo_id')->references('id')->on('todos')->onDelete('cascade');
 
             // Table options
             $table->engine = 'InnoDB';
@@ -39,6 +40,6 @@ class CreateGoalTodosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('goal_todos');
+        Schema::dropIfExists('tag_todo');
     }
 }
