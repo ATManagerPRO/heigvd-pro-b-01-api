@@ -17,7 +17,7 @@ class Tag extends Model
     /**
      * Get todos that use this tag
      */
-    public function todo()
+    public function todos()
     {
         return $this->belongsToMany('App\Todo');
     }

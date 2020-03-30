@@ -17,7 +17,7 @@ class Todo extends Model
     /**
      * Get todo's tags
      */
-    public function tag()
+    public function tags()
     {
         return $this->belongsToMany('App\Tag');
     }

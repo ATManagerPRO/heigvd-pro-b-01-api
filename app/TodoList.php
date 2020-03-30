@@ -9,7 +9,7 @@ class TodoList extends Model
     /**
      * Get all Todo for the current todoList.
      */
-    public function todo()
+    public function todos()
     {
         return $this->hasMany('App\Todo');
     }
@@ -33,7 +33,7 @@ class TodoList extends Model
     /**
      * Get todoList's creator
      */
-    public function userInvited()
+    public function usersInvited()
     {
         return $this->belongsToMany('App\User');
     }

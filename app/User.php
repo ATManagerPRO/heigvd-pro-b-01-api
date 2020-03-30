@@ -10,7 +10,7 @@ class User extends Model
     /**
      * Get all tags of the user
      */
-    public function tag()
+    public function tags()
     {
         return $this->hasMany('App\Tag');
     }
@@ -18,7 +18,7 @@ class User extends Model
     /**
      * Get all todoLists of the user
      */
-    public function todoList()
+    public function todosList()
     {
         return $this->hasMany('App\TodoList');
     }
@@ -26,7 +26,7 @@ class User extends Model
     /**
      * Get all folders of the user
      */
-    public function folder()
+    public function folders()
     {
         return $this->hasMany('App\Folder');
     }
@@ -34,7 +34,7 @@ class User extends Model
     /**
      * Get all todoLists the user is invited in
      */
-    public function todoListInvited()
+    public function todosListInvited()
     {
         return $this->belongsToMany('App\TodoList');
     }
@@ -42,7 +42,7 @@ class User extends Model
     /**
      * Get all the assigned todos
      */
-    public function todo()
+    public function todos()
     {
         return $this->hasMany('App\Todo');
     }
