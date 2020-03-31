@@ -2,38 +2,48 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * Get all tags of the user
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    public function tags()
+    {
+        return $this->hasMany('App\Tag');
+    }
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * Get all todoLists of the user
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function todosList()
+    {
+        return $this->hasMany('App\TodoList');
+    }
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
+     * Get all folders of the user
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function folders()
+    {
+        return $this->hasMany('App\Folder');
+    }
+
+    /**
+     * Get all todoLists the user is invited in
+     */
+    public function todosListInvited()
+    {
+        return $this->belongsToMany('App\TodoList');
+    }
+
+    /**
+     * Get all the assigned todos
+     */
+    public function todos()
+    {
+        return $this->hasMany('App\Todo');
+    }
 }

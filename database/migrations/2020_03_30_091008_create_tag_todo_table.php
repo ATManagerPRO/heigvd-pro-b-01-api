@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateTagTodoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,18 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        // Pivot table between tags and todos
+        Schema::create('tag_todo', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('googleToken', 255)->unique();
-            $table->string('pseudo', 50)->unique();
+            $table->unsignedBigInteger('tag_id');
+            $table->unsignedBigInteger('todo_id');
             $table->timestamps();
+
+            $table->unique(['tag_id', 'todo_id']);
+
+            // Foreign keys constraints
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->foreign('todo_id')->references('id')->on('todos')->onDelete('cascade');
 
             // Table options
             $table->engine = 'InnoDB';
@@ -33,6 +40,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tag_todo');
     }
 }

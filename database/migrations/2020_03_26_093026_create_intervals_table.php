@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateIntervalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('intervals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('googleToken', 255)->unique();
-            $table->string('pseudo', 50)->unique();
-            $table->timestamps();
+            $table->string('label');
 
             // Table options
             $table->engine = 'InnoDB';
@@ -33,6 +31,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('intervals');
     }
 }

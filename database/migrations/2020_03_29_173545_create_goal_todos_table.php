@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateGoalTodosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('goal_todos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('googleToken', 255)->unique();
-            $table->string('pseudo', 50)->unique();
+            $table->unsignedBigInteger('goal_id');
+            $table->integer('quantityDone')->nullable();
+            $table->timestamp('dateTimeDone')->nullable();
+            $table->date('dueDate');
             $table->timestamps();
+
+            // Foreign keys constraints
+            $table->foreign('goal_id')->references('id')->on('goals')->onDelete('cascade');
 
             // Table options
             $table->engine = 'InnoDB';
@@ -33,6 +38,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('goal_todos');
     }
 }
