@@ -16,16 +16,17 @@ class CreateGoalsTable extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('interval_id')->nullable(); // Unit (day, week, ...) FK
             $table->unsignedInteger('quantity');
             $table->string('label', 50);
             $table->date('dueDate');
-            $table->unsignedInteger('interval'); // Unit (day, week, ...)
-            $table->unsignedInteger('intervalValue'); // Amount (1,2, ...)
+            $table->unsignedInteger('intervalValue'); // Amount (1,2, ...) of interval unit
             $table->timestamps();
 
             // Foreign keys constraints
             // User deleted => goal deleted
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('interval_id')->references('id')->on('intervals'); // Prevent deletion
 
             // Table options
             $table->engine = 'InnoDB';
