@@ -15,7 +15,7 @@ class Todo extends Model
     }
 
     /**
-     * Get todo's tags
+     * Get todo's tags.
      */
     public function tags()
     {
@@ -23,10 +23,18 @@ class Todo extends Model
     }
 
     /**
-     * Get the assigned user
+     * Get the assigned user.
      */
     public function user()
     {
         return $this->hasOne('App\User');
+    }
+
+    /**
+     * Get todo's interval.
+     */
+    public function interval()
+    {
+        return $this->hasOne('App\Interval');
     }
 }
