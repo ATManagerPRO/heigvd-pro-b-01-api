@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(TodoList::class, function (Faker $faker) {
     return [
-        'title' => $faker->sentence,
+        'title' => $faker->word . '_todoList',
         'created_at' => now(),
         'updated_at' => now(),
     ];
