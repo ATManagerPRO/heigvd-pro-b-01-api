@@ -12,8 +12,8 @@ class TestController extends Controller
 
         $todoList = TodoList::where('id', 3)->firstOrFail();
         $linkedTodos = $todoList->todos;
-        dd($todoList);
         //dd($linkedTodos);
+        dd($linkedTodos);
 
     }
 
