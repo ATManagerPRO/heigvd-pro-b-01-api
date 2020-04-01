@@ -35,5 +35,13 @@ class TagsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('tags')->insert([
+            'id' => 4,
+            'user_id' => 2,
+            'label' => 'Gaming',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
