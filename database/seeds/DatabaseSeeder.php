@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TodoList_UserTableSeeder::class);
         $this->call(IntervalTableSeeder::class);
         $this->call(TodosTableSeeder::class);
+        $this->call(Tag_TodoTableSeeder::class);
     }
 }
