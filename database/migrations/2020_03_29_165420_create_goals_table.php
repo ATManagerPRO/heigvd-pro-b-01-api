@@ -16,10 +16,10 @@ class CreateGoalsTable extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('interval_id')->nullable(); // Unit (day, week, ...) FK
+            $table->unsignedBigInteger('interval_id'); // Unit (day, week, ...) FK
             $table->unsignedInteger('quantity');
             $table->string('label', 50);
-            $table->date('dueDate');
+            $table->date('endDate');
             $table->unsignedInteger('intervalValue'); // Amount (1,2, ...) of interval unit
             $table->timestamps();
 
