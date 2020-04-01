@@ -25,6 +25,7 @@ class CreateTodosTable extends Migration
             $table->dateTime('reminderDateTime')->nullable();
             $table->unsignedInteger('intervalValue')->nullable(); // Amount (1,2, ...) of interval unit
             $table->date('intervalEndDate')->nullable();
+            $table->boolean('archived')->default(0);
             $table->timestamps();
 
             // Foreign keys constraints
