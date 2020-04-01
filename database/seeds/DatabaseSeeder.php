@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TodosTableSeeder::class);
         $this->call(Tag_TodoTableSeeder::class);
         $this->call(GoalTableSeeder::class);
+        $this->call(Goal_TodosTableSeeder::class);
     }
 }
