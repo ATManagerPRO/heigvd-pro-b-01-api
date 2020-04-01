@@ -15,7 +15,7 @@ class TodosTableSeeder extends Seeder
     {
         DB::table('todos')->insert([
             'id' => 1,
-            'todoList_id' => 3,
+            'todo_list_id' => 3,
             'user_id' => 1, // Whose assigned
             'interval_id' => null,
             'title' => 'Test des battle royal disponibles',
@@ -31,7 +31,7 @@ class TodosTableSeeder extends Seeder
 
         DB::table('todos')->insert([
             'id' => 2,
-            'todoList_id' => 3,
+            'todo_list_id' => 3,
             'user_id' => null, // Whose assigned
             'interval_id' => null,
             'title' => 'Préparer live twitch',
@@ -47,7 +47,7 @@ class TodosTableSeeder extends Seeder
 
         DB::table('todos')->insert([
             'id' => 3,
-            'todoList_id' => 2,
+            'todo_list_id' => 2,
             'user_id' => null, // Whose assigned
             'interval_id' => 2,
             'title' => 'Jour des jambes',
@@ -63,7 +63,7 @@ class TodosTableSeeder extends Seeder
 
         DB::table('todos')->insert([
             'id' => 4,
-            'todoList_id' => 1,
+            'todo_list_id' => 1,
             'user_id' => null, // Whose assigned
             'interval_id' => 1,
             'title' => 'Devoir',
@@ -79,7 +79,7 @@ class TodosTableSeeder extends Seeder
 
         DB::table('todos')->insert([
             'id' => 5,
-            'todoList_id' => 4,
+            'todo_list_id' => 4,
             'user_id' => null, // Whose assigned
             'interval_id' => null,
             'title' => 'Faire les cours',
