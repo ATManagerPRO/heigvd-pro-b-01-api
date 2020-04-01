@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(IntervalTableSeeder::class);
         $this->call(TodosTableSeeder::class);
         $this->call(Tag_TodoTableSeeder::class);
+        $this->call(GoalTableSeeder::class);
     }
 }
