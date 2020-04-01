@@ -2,13 +2,16 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\TodoList;
+use App\Folder;
+use App\User;
 use Faker\Generator as Faker;
 
-$factory->define(TodoList::class, function (Faker $faker) {
+$factory->define(Folder::class, function (Faker $faker) {
     return [
-        'title' => $faker->word . '_todoList',
+        'user_id' => factory(User::class),
+        'label' => $faker->word . "_folder",
         'created_at' => now(),
         'updated_at' => now(),
     ];
+
 });
