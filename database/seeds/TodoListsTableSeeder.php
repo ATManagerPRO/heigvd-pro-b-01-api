@@ -38,5 +38,14 @@ class TodoListsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('todo_lists')->insert([
+            'id' => 4,
+            'user_id' => 1,
+            'folder_id' => null,
+            'title' => 'Autres',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

@@ -23,7 +23,7 @@ class CreateTodosTable extends Migration
             $table->date('dueDate')->nullable();
             $table->dateTime('dateTimeDone')->nullable();
             $table->dateTime('reminderDateTime')->nullable();
-            $table->unsignedInteger('intervalValue'); // Amount (1,2, ...) of interval unit
+            $table->unsignedInteger('intervalValue')->nullable(); // Amount (1,2, ...) of interval unit
             $table->date('intervalEndDate')->nullable();
             $table->timestamps();
 
