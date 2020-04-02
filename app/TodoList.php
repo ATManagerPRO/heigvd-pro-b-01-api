@@ -17,9 +17,9 @@ class TodoList extends Model
     /**
      * Get todoList's creator
      */
-    public function user()
+    public function author()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     /**
@@ -27,7 +27,7 @@ class TodoList extends Model
      */
     public function folder()
     {
-        return $this->hasOne('App\Folder');
+        return $this->belongsTo('App\Folder');
     }
 
     /**

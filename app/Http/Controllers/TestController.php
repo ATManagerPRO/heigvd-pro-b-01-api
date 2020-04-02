@@ -10,11 +10,9 @@ class TestController extends Controller
 
     public function test(){
 
-        $todoList = TodoList::where('id', 3)->firstOrFail();
-        $linkedTodos = $todoList->todos;
-        //dd($linkedTodos);
-        dd($linkedTodos);
+        $todoList = TodoList::where('id', 1)->with('folder')->with('author')->with('todos')->get();
 
+        return $todoList;
     }
 
 }
