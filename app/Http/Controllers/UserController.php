@@ -13,7 +13,7 @@ class UserController extends Controller
      * The json will display at the beginning all todolists without folder
      * and after, all user's folder with their linked todolists
      *
-     * @return Response JsonArray
+     * @return array jsonArray
      */
     public function todolists($id)
     {
