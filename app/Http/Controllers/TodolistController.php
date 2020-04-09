@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\TodoList;
+use App\Todo;
 use Illuminate\Http\Request;
 
 class TodolistController extends Controller
@@ -10,10 +10,16 @@ class TodolistController extends Controller
     /**
      * Display a JSON listing of todos for the specific todolist.
      *
-     * @return Response
+     * @return array JsonArray
      */
     public function todos($id)
     {
-        dd("Todos of todolist with id : $id ");
+        $todos = Todo::where('todo_list_id', $id)->get();
+
+        $array = [
+            "todos" => $todos,
+        ];
+
+        return $array;
     }
 }
