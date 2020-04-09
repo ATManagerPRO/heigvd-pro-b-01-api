@@ -17,5 +17,5 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'api/v1/'], function () {
-    Route::get('todolists/{id}/todos', ['uses' => 'TodolistController@todos']);
+    Route::get('todolists/{todolist}/todos', ['uses' => 'TodolistController@todos']);
 });
