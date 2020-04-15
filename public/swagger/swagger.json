@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ATManager API",
+    "description": "...",
+    "version": "1.0.0"
+  },
+  "host": "atmanager.gollgot.app",
+  "basePath": "/api/v1",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/users/{user_id}/todolists": {
+      "get": {
+        "summary": "Returns all todolists and folders relative to a specific user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "description": "The user id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A todolist array and a folders array.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "todolists": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 4
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "folder_id": {
+                        "type": "integer",
+                        "example": null
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Autres"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      }
+                    }
+                  }
+                },
+                "folders": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "label": {
+                        "type": "string",
+                        "example": "My personal folder"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "todolist": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "user_id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "folder_id": {
+                              "type": "integer",
+                              "example": null
+                            },
+                            "title": {
+                              "type": "string",
+                              "example": "School work list"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "example": "2020-04-15 15:14:04"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "example": "2020-04-15 15:14:04"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todolists/{todolist_id}/todos": {
+      "get": {
+        "summary": "Returns all todos relative to a specific todolist",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "todolist_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "description": "The todolist id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A todos array",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "todos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 4
+                      },
+                      "todo_list_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "example": null
+                      },
+                      "interval_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Homework"
+                      },
+                      "details": {
+                        "type": "string",
+                        "example": "Do all my homework for this day"
+                      },
+                      "dueDate": {
+                        "type": "string",
+                        "example": "2020-04-20"
+                      },
+                      "dateTimeDone": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "reminderDateTime": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "intervalValue": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "intervalEndDate": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
