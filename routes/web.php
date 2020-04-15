@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['prefix' => 'api/v1/'], function () {
+    Route::get('todolists/{todolist}/todos', ['uses' => 'TodolistController@todos']);
+    Route::get('users/{user}/todolists', ['uses' => 'UserController@todolists']);
+});
