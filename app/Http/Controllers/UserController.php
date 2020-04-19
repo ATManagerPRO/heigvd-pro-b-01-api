@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Folder;
 use App\TodoList;
+use App\Goal;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -23,6 +24,22 @@ class UserController extends Controller
         $array = [
             "todolists" => $todolistsWithoutFolder,
             "folders" => $foldersContainsTodolists,
+        ];
+
+        return $array;
+    }
+
+    /**
+     * Returns all the goals a given user
+     * @param $id
+     * @return array jsonArray
+     */
+    public function goals($id)
+    {
+        $goals = Goal::where('user_id', $id)->get();
+
+        $array = [
+            "goals" => $goals,
         ];
 
         return $array;

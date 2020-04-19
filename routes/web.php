@@ -17,6 +17,13 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'api/v1/'], function () {
-    Route::get('todolists/{todolist}/todos', ['uses' => 'TodolistController@todos']);
+    // Users
     Route::get('users/{user}/todolists', ['uses' => 'UserController@todolists']);
+    Route::get('users/{user}/goals', ['uses' => 'UserController@goals']);
+
+    // Todolists
+    Route::get('todolists/{todolist}/todos', ['uses' => 'TodolistController@todos']);
+
+    // Goals
+    Route::get('goals/{goal}/goaltodos', ['uses' => 'GoalController@goaltodos']);
 });
