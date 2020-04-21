@@ -13,7 +13,7 @@
   "paths": {
     "/users/{user_id}/todolists": {
       "get": {
-        "summary": "Returns all todolists and folders relative to a specific user",
+        "summary": "Returns all todolists and folders of a given user.",
         "parameters": [
           {
             "in": "path",
@@ -30,7 +30,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "todolists": {
+                "todoLists": {
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -128,9 +128,138 @@
         }
       }
     },
+    "/users/{user_id}/goals": {
+      "get": {
+        "summary": "Returns all goals of given user.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "description": "The user id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A goal array.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "todolists": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "interval_id": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "example": 10
+                      },
+                      "label": {
+                        "type": "string",
+                        "example": "Faire du sport"
+                      },
+                      "endDate": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "intervalValue": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      }
+                    }
+                  }
+                },
+                "folders": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "label": {
+                        "type": "string",
+                        "example": "My personal folder"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "todolist": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "user_id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "folder_id": {
+                              "type": "integer",
+                              "example": null
+                            },
+                            "title": {
+                              "type": "string",
+                              "example": "School work list"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "example": "2020-04-15 15:14:04"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "example": "2020-04-15 15:14:04"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/todolists/{todolist_id}/todos": {
       "get": {
-        "summary": "Returns all todos relative to a specific todolist",
+        "summary": "Returns all todos of a given todolist.",
         "parameters": [
           {
             "in": "path",
@@ -195,6 +324,111 @@
                       "intervalEndDate": {
                         "type": "string",
                         "example": null
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 5
+                            },
+                            "user_id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "label": {
+                              "type": "string",
+                              "example": "School"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "example": "2020-04-09 08:20:17"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "example": "2020-04-09 08:20:17"
+                            },
+                            "pivot": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "todo_id": {
+                                    "type": "integer",
+                                    "example": 4
+                                  },
+                                  "tag_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/goals/{goal_id}/goaltodos": {
+      "get": {
+        "summary": "Returns all goaltodos of a given goal.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "goal_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "description": "The goal id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A goaltodos array",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "goalTodos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 4
+                      },
+                      "goal_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "quantityDone": {
+                        "type": "integer",
+                        "example": null
+                      },
+                      "dateTimeDone": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "dueDate": {
+                        "type": "string",
+                        "example": "2020-04-20"
                       },
                       "created_at": {
                         "type": "string",

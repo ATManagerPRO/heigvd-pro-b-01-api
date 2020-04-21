@@ -22,7 +22,7 @@ class UserController extends Controller
         $foldersContainsTodolists = Folder::where('user_id', $id)->with("todolist")->get();
 
         $array = [
-            "todolists" => $todolistsWithoutFolder,
+            "todoLists" => $todolistsWithoutFolder,
             "folders" => $foldersContainsTodolists,
         ];
 
