@@ -27,3 +27,7 @@ Route::group(['prefix' => 'api/v1/'], function () {
     // Goals
     Route::get('goals/{goal}/goaltodos', ['uses' => 'GoalController@goaltodos']);
 });
+
+
+// Google sign-in test
+Route::get('google_auth/login', ['uses' => 'GoogleAuthController@login']);
