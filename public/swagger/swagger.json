@@ -386,6 +386,75 @@
         }
       }
     },
+    "/users/{user_id}/goaltodos/today": {
+      "get": {
+        "summary": "Returns all user's goaltodos for today.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "description": "The user id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A goaltodos array",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "goalTodos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 4
+                      },
+                      "goal_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "quantityDone": {
+                        "type": "integer",
+                        "example": null
+                      },
+                      "dateTimeDone": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "dueDate": {
+                        "type": "string",
+                        "example": "2020-04-30"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "label": {
+                        "type": "string",
+                        "example": "Faire du sport"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "example": 20
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/todolists/{todolist_id}/todos": {
       "get": {
         "summary": "Returns all todos of a given todolist.",
