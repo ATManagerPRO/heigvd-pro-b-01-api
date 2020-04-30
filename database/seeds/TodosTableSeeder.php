@@ -25,6 +25,7 @@ class TodosTableSeeder extends Seeder
             'reminderDateTime' => null,
             'intervalValue' => null,
             'intervalEndDate' => null,
+            'favorite' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -41,6 +42,7 @@ class TodosTableSeeder extends Seeder
             'reminderDateTime' => null,
             'intervalValue' => null,
             'intervalEndDate' => null,
+            'favorite' => true,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -57,6 +59,7 @@ class TodosTableSeeder extends Seeder
             'reminderDateTime' => null,
             'intervalValue' => 1,
             'intervalEndDate' => Carbon::create('2020', '05', '17'),
+            'favorite' => true,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -73,6 +76,7 @@ class TodosTableSeeder extends Seeder
             'reminderDateTime' => null,
             'intervalValue' => 1,
             'intervalEndDate' => null,
+            'favorite' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -89,6 +93,7 @@ class TodosTableSeeder extends Seeder
             'reminderDateTime' => null,
             'intervalValue' => null,
             'intervalEndDate' => null,
+            'favorite' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
