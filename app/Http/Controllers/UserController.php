@@ -53,13 +53,32 @@ class UserController extends Controller
      * @return array jsonArray
      */
     public function todosToday($id){
-        $todosOfToday = Todo::where(['user_id' => $id, 'dueDate' => date('Y-m-d')])->with('tags')->get();
 
-        $array = [
-            "todos" => $todosOfToday
+        $todoLists = TodoList::select('id')->where(['user_id' => $id])->get()->toArray();
+
+        $array = [];
+
+        // loop through user's todoList
+        foreach ($todoLists as $todoList){
+
+            $todos = Todo::where(['todo_list_id' => $todoList['id'], 'dueDate' => date('Y-m-d')])->get()->toArray();
+
+            // Todos exists
+            if (!empty($todos)) {
+                // Loop through todos
+                foreach ($todos as $todo) {
+                    // Add todos to the array
+                    array_push($array, $todo);
+                }
+            }
+
+        }
+
+        $result = [
+            "todos" => $array
         ];
 
-        return $array;
+        return $result;
     }
 
     /**
