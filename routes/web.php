@@ -20,6 +20,8 @@ Route::group(['prefix' => 'api/v1/'], function () {
     // Users
     Route::get('users/{user}/todolists', ['uses' => 'UserController@todolists']);
     Route::get('users/{user}/goals', ['uses' => 'UserController@goals']);
+    Route::get('users/{user}/todos/today', ['uses' => 'UserController@todosToday']);
+    Route::get('users/{user}/goaltodos/today', ['uses' => 'UserController@goaltodosToday']);
 
     // Todolists
     Route::get('todolists/{todolist}/todos', ['uses' => 'TodolistController@todos']);

@@ -25,5 +25,17 @@ class GoalTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        DB::table('goals')->insert([
+            'id' => 2,
+            'user_id' => 1,
+            'interval_id' => 2,
+            'quantity' => 10,
+            'label' => 'Boire de l\'eau',
+            'endDate' => Carbon::create('2020', '07', '01'),
+            'intervalValue' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
     }
 }
