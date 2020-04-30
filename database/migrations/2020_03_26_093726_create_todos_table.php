@@ -20,7 +20,7 @@ class CreateTodosTable extends Migration
             $table->unsignedBigInteger('interval_id')->nullable(); // Unit (day, week, ...) FK
             $table->string('title', 50);
             $table->text('details')->nullable();
-            $table->date('dueDate')->nullable();
+            $table->dateTime('dueDate')->nullable();
             $table->dateTime('dateTimeDone')->nullable();
             $table->dateTime('reminderDateTime')->nullable();
             $table->unsignedInteger('intervalValue')->nullable(); // Amount (1,2, ...) of interval unit
