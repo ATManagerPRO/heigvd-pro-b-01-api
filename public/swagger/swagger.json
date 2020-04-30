@@ -257,6 +257,135 @@
         }
       }
     },
+    "/users/{user_id}/todos/today": {
+      "get": {
+        "summary": "Returns all user's todos for today",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "description": "The user id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A todos array",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "todos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 4
+                      },
+                      "todo_list_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "example": null
+                      },
+                      "interval_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Homework"
+                      },
+                      "details": {
+                        "type": "string",
+                        "example": "Do all my homework for this day"
+                      },
+                      "dueDate": {
+                        "type": "string",
+                        "example": "2020-04-20"
+                      },
+                      "dateTimeDone": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "reminderDateTime": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "intervalValue": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "intervalEndDate": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2020-04-15 15:14:04"
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 5
+                            },
+                            "user_id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "label": {
+                              "type": "string",
+                              "example": "School"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "example": "2020-04-09 08:20:17"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "example": "2020-04-09 08:20:17"
+                            },
+                            "pivot": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "todo_id": {
+                                    "type": "integer",
+                                    "example": 4
+                                  },
+                                  "tag_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/todolists/{todolist_id}/todos": {
       "get": {
         "summary": "Returns all todos of a given todolist.",

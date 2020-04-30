@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Folder;
+use App\Todo;
 use App\TodoList;
 use App\Goal;
 use Illuminate\Http\Request;
@@ -44,4 +45,20 @@ class UserController extends Controller
 
         return $array;
     }
+
+    /**
+     * Returns all todos a given user for today
+     * @param $id
+     * @return array jsonArray
+     */
+    public function todosToday($id){
+        $todosOfToday = Todo::where(['user_id' => $id, 'dueDate' => date('Y-m-d')])->with('tags')->get();
+
+        $array = [
+            "todos" => $todosOfToday
+        ];
+
+        return $array;
+    }
+
 }
