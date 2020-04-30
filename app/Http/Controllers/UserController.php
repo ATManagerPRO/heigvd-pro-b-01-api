@@ -8,6 +8,7 @@ use App\Todo;
 use App\TodoList;
 use App\Goal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -61,7 +62,11 @@ class UserController extends Controller
         // loop through user's todoList
         foreach ($todoLists as $todoList){
 
-            $todos = Todo::where(['todo_list_id' => $todoList['id'], 'dueDate' => date('Y-m-d')])->get()->toArray();
+            $todos = Todo::
+                where(['todo_list_id' => $todoList['id']])->
+                where(DB::raw("DATE(todos.dueDate)"), "=", date('Y-m-d'))->
+                where(DB::raw("TIME(todos.dueDate)"), ">", date('H-i-s'))
+                ->get()->toArray();
 
             // Todos exists
             if (!empty($todos)) {
@@ -94,7 +99,11 @@ class UserController extends Controller
         // loop through user's goals
         foreach ($goals as $goal){
 
-                $goalTodos = GoalTodo::where(['goal_id' => $goal['id'], 'dueDate' => date('Y-m-d')])->get()->toArray();
+                $goalTodos = GoalTodo::
+                    where(['goal_id' => $goal['id']])->
+                    where(DB::raw("DATE(goal_todos.dueDate)"), "=", date('Y-m-d'))->
+                    where(DB::raw("TIME(goal_todos.dueDate)"), ">", date('H-i-s'))
+                    ->get()->toArray();
 
                 // GoalTodos exists
                 if (!empty($goalTodos)) {
