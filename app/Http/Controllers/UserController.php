@@ -65,8 +65,8 @@ class UserController extends Controller
             $todos = Todo::
                 where(['todo_list_id' => $todoList['id']])->
                 where(DB::raw("DATE(todos.dueDate)"), "=", date('Y-m-d'))->
-                where(DB::raw("TIME(todos.dueDate)"), ">", date('H-i-s'))
-                ->get()->toArray();
+                get()->
+                toArray();
 
             // Todos exists
             if (!empty($todos)) {
@@ -102,8 +102,8 @@ class UserController extends Controller
                 $goalTodos = GoalTodo::
                     where(['goal_id' => $goal['id']])->
                     where(DB::raw("DATE(goal_todos.dueDate)"), "=", date('Y-m-d'))->
-                    where(DB::raw("TIME(goal_todos.dueDate)"), ">", date('H-i-s'))
-                    ->get()->toArray();
+                    get()->
+                    toArray();
 
                 // GoalTodos exists
                 if (!empty($goalTodos)) {
