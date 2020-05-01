@@ -28,8 +28,11 @@ Route::group(['prefix' => 'api/v1/'], function () {
 
     // Goals
     Route::get('goals/{goal}/goaltodos', ['uses' => 'GoalController@goaltodos']);
+
+    // Auth
+    Route::post('auth', ['uses' => 'GoogleAuthController@login']);
 });
 
 
 // Google sign-in test
-Route::get('google_auth/login', ['uses' => 'GoogleAuthController@login']);
+Route::get('google_auth/login', ['uses' => 'GoogleAuthController@loginTest']);
