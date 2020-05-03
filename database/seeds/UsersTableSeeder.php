@@ -39,5 +39,13 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('users')->insert([
+            'id' => 4,
+            'googleToken' => Str::random(50),
+            'pseudo' => 'Alexandre',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

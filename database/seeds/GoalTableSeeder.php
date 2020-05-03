@@ -37,5 +37,29 @@ class GoalTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        DB::table('goals')->insert([
+            'id' => 3,
+            'user_id' => 4,
+            'interval_id' => 2,
+            'quantity' => 20,
+            'label' => 'Longueur 50m à la nage',
+            'endDate' => Carbon::create('2020', '12', '30'),
+            'intervalValue' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('goals')->insert([
+            'id' => 4,
+            'user_id' => 4,
+            'interval_id' => 4,
+            'quantity' => 1,
+            'label' => 'Sortie à vélo de 50km',
+            'endDate' => Carbon::create('2020', '10', '20'),
+            'intervalValue' => 2,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
     }
 }

@@ -43,5 +43,69 @@ class TagsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('tags')->insert([
+            'id' => 5,
+            'user_id' => 4,
+            'label' => 'Facture',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('tags')->insert([
+            'id' => 6,
+            'user_id' => 4,
+            'label' => 'Gaming',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('tags')->insert([
+            'id' => 7,
+            'user_id' => 4,
+            'label' => 'Administratif',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('tags')->insert([
+            'id' => 8,
+            'user_id' => 4,
+            'label' => 'Bien-être',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('tags')->insert([
+            'id' => 9,
+            'user_id' => 4,
+            'label' => 'Sorties',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('tags')->insert([
+            'id' => 10,
+            'user_id' => 4,
+            'label' => 'Nourriture',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('tags')->insert([
+            'id' => 11,
+            'user_id' => 4,
+            'label' => 'Life style',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('tags')->insert([
+            'id' => 12,
+            'user_id' => 4,
+            'label' => 'Cours',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
