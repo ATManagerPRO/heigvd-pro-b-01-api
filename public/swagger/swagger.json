@@ -449,6 +449,31 @@
                       "quantity": {
                         "type": "integer",
                         "example": 20
+                      },
+                      "intervalValue": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "interval_id": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "created_at_goal": {
+                        "type": "string",
+                        "example": "2020-05-03 12:16:51"
+                      },
+                      "interval": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 2
+                          },
+                          "label": {
+                            "type": "string",
+                            "example": "week"
+                          }
+                        }
                       }
                     }
                   }

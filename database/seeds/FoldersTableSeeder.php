@@ -27,5 +27,45 @@ class FoldersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('folders')->insert([
+            'id' => 3,
+            'user_id' => 4,
+            'label' => 'Maison',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('folders')->insert([
+            'id' => 4,
+            'user_id' => 4,
+            'label' => 'Ecole',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('folders')->insert([
+            'id' => 5,
+            'user_id' => 4,
+            'label' => 'Administratif',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('folders')->insert([
+            'id' => 6,
+            'user_id' => 4,
+            'label' => 'Vacances',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('folders')->insert([
+            'id' => 7,
+            'user_id' => 4,
+            'label' => 'Amis',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

@@ -92,27 +92,28 @@ class UserController extends Controller
      * @return array jsonArray
      */
     public function goalTodosToday($id){
-        $goals = Goal::select('id', 'label', 'quantity')->where(['user_id' => $id])->get()->toArray();
+
+        $goals = Goal::select('id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')->where(['user_id' => $id])->with('interval')->get()->toArray();
 
         $array = [];
 
         // loop through user's goals
         foreach ($goals as $goal){
 
-                $goalTodos = GoalTodo::
-                    where(['goal_id' => $goal['id']])->
-                    where(DB::raw("DATE(goal_todos.dueDate)"), "=", date('Y-m-d'))->
-                    get()->
-                    toArray();
+            $goalTodos = GoalTodo::
+                where(['goal_id' => $goal['id']])->
+                where(DB::raw("DATE(goal_todos.dueDate)"), "=", date('Y-m-d'))->
+                get()->
+                toArray();
 
-                // GoalTodos exists
-                if (!empty($goalTodos)) {
-                    // Loop through goalTodos
-                    foreach ($goalTodos as $goalTodo) {
-                        // Create a new array with goalData we have and goalTodos
-                        array_push($array, array_merge($goalTodo, $goal));
-                    }
+            // GoalTodos exists
+            if (!empty($goalTodos)) {
+                // Loop through goalTodos
+                foreach ($goalTodos as $goalTodo) {
+                    // Create a new array with goalData we have and goalTodos
+                    array_push($array, array_merge($goalTodo, $goal));
                 }
+            }
 
         }
 
