@@ -9,7 +9,7 @@ class Interval extends Model
     /**
      * Get all todos of interval.
      */
-    public function interval()
+    public function todos()
     {
         return $this->hasMany('App\Todo');
     }

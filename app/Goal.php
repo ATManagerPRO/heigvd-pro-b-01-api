@@ -27,6 +27,6 @@ class Goal extends Model
      */
     public function interval()
     {
-        return $this->hasOne('App\Interval');
+        return $this->belongsTo('App\Interval', 'interval_id');
     }
 }
