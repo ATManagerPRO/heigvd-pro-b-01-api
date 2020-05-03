@@ -42,8 +42,9 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'id' => 4,
-            'googleToken' => Str::random(50),
-            'pseudo' => 'Alexandre',
+            'googleId' => Str::random(50),
+            'email' => 'alex@gmail.com',
+            'authToken' => Str::random(env("AUTH_TOKEN_LENGTH")),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
