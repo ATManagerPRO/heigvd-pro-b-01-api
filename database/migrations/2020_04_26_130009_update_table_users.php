@@ -27,6 +27,10 @@ class UpdateTableUsers extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('googleId', 'googleToken');
+            $table->renameColumn('email', 'pseudo');
+            $table->dropColumn('authToken');
+        });
     }
 }
