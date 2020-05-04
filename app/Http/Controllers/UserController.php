@@ -127,7 +127,7 @@ class UserController extends Controller
      */
     public function goalTodosToday($id){
 
-        $goals = Goal::select('id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
+        $goals = Goal::select('id AS goal_id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
             ->where(['user_id' => $id])->with('interval')->get()->toArray();
 
         $array = [];
@@ -136,7 +136,7 @@ class UserController extends Controller
         foreach ($goals as $goal){
 
             $goalTodos = GoalTodo::
-                where(['goal_id' => $goal['id']])->
+                where(['goal_id' => $goal['goal_id']])->
                 where(DB::raw("DATE(goal_todos.dueDate)"), "=", date('Y-m-d'))->
                 get()->
                 toArray();
@@ -166,7 +166,7 @@ class UserController extends Controller
      */
     public function goalTodos($userId){
 
-        $goals = Goal::select('id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
+        $goals = Goal::select('id AS goal_id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
             ->where(['user_id' => $userId])->with('interval')->get()->toArray();
 
         $allGoalTodos = [];
@@ -175,7 +175,7 @@ class UserController extends Controller
         foreach ($goals as $goal){
 
             $goalTodos = GoalTodo::
-                where(['goal_id' => $goal['id']])->
+                where(['goal_id' => $goal['goal_id']])->
                 get()->
                 toArray();
 
