@@ -64,7 +64,7 @@ class GoogleAuthController extends Controller
                 $newUserId = DB::table('users')->insertGetId([
                     'googleId' => $userId,
                     'email' => $payLoad['email'],
-                    'authToken' => $uniqueToken,
+                    'tokenAPI' => $uniqueToken,
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);
@@ -77,12 +77,12 @@ class GoogleAuthController extends Controller
                     'updated_at' => now()
                 ]);
 
-                return $JSONResponseHelper->createdJSONResponse(['userId' => $newUserId, 'token' => $uniqueToken]);
+                return $JSONResponseHelper->createdJSONResponse(['userId' => $newUserId, 'tokenAPI' => $uniqueToken]);
 
             } else { // User already exists, renew token
-                User::where('googleId', $userId)->update(['authToken' => $uniqueToken]);
+                User::where('googleId', $userId)->update(['tokenAPI' => $uniqueToken]);
 
-                return $JSONResponseHelper->successJSONResponse(['userId' => $user['id'],'token' => $uniqueToken]);
+                return $JSONResponseHelper->successJSONResponse(['userId' => $user['id'],'tokenAPI' => $uniqueToken]);
             }
 
         } else { // Invalid token
