@@ -31,6 +31,7 @@ class GoogleAuthController extends Controller
 
     /**
      * Generates new user token and update/create user entry in database.
+     * Creates default todolist for new users as well.
      * @param Request $request
      * @return JsonResponse
      */
@@ -65,6 +66,14 @@ class GoogleAuthController extends Controller
                     'googleId' => $userId,
                     'email' => $payLoad['email'],
                     'authToken' => $uniqueToken,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+
+                // Create default todolist
+                DB::table('todo_lists')->insert([
+                    'user_id' => $newUserId,
+                    'title' => 'My Tasks',
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);

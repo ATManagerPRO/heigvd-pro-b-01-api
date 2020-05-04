@@ -484,17 +484,17 @@
         }
       }
     },
-    "/todolists/{todolist_id}/todos": {
+    "/users/{user_id}/todos": {
       "get": {
-        "summary": "Returns all todos of a given todolist.",
+        "summary": "Returns all todos of a given user.",
         "parameters": [
           {
             "in": "path",
-            "name": "todolist_id",
+            "name": "user_id",
             "required": true,
             "type": "integer",
             "minimum": 1,
-            "description": "The todolist id"
+            "description": "The user id"
           }
         ],
         "responses": {
@@ -617,17 +617,17 @@
         }
       }
     },
-    "/goals/{goal_id}/goaltodos": {
+    "/users/{user_id}/goaltodos": {
       "get": {
-        "summary": "Returns all goaltodos of a given goal.",
+        "summary": "Returns all goaltodos of a given user.",
         "parameters": [
           {
             "in": "path",
-            "name": "goal_id",
+            "name": "user_id",
             "required": true,
             "type": "integer",
             "minimum": 1,
-            "description": "The goal id"
+            "description": "The user id"
           }
         ],
         "responses": {
@@ -668,6 +668,39 @@
                       "updated_at": {
                         "type": "string",
                         "example": "2020-04-15 15:14:04"
+                      },
+                      "label": {
+                        "type": "string",
+                        "example": "Faire du sport"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "intervalValue": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "interval_id": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "created_at_goal": {
+                        "type": "string",
+                        "example": "2020-04-14 15:14:04"
+                      },
+                      "interval": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 2
+                          },
+                          "label": {
+                            "type": "string",
+                            "example": "week"
+                          }
+                        }
                       }
                     }
                   }
