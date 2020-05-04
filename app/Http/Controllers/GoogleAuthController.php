@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomHelpers\JSONResponseHelper;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -37,6 +38,8 @@ class GoogleAuthController extends Controller
      */
     public function login(Request $request)
     {
+        $JSONResponseHelper = new JSONResponseHelper();
+
         $idToken = $request->bearerToken();
 
         // Verify sign in token with Google API
@@ -53,11 +56,7 @@ class GoogleAuthController extends Controller
             $uniqueToken = GoogleAuthController::createUserToken();
             if($uniqueToken == "") {
                 // Appropriate source of randomness couldn't be found or params are causing errors
-                return response()->json([
-                    'label' => "ERROR: Could not create secure API token",
-                    'userId' => null,
-                    'token' => null
-                ])->setStatusCode(500);
+                return $JSONResponseHelper->customJSONResponse(500, "Could not create secure API token");
             }
 
             if (empty($user)) { // User doesn't exist which means it's his first login
@@ -78,28 +77,16 @@ class GoogleAuthController extends Controller
                     'updated_at' => now()
                 ]);
 
-                return response()->json([
-                    'label' => "SUCCESS: New user",
-                    'userId' => $newUserId,
-                    'token' => $uniqueToken
-                ])->setStatusCode(201);
+                return $JSONResponseHelper->createdJSONResponse(['userId' => $newUserId, 'token' => $uniqueToken]);
 
             } else { // User already exists, renew token
                 User::where('googleId', $userId)->update(['authToken' => $uniqueToken]);
 
-                return response()->json([
-                    'label' => "SUCCESS: Existing user",
-                    'userId' => $user['id'],
-                    'token' => $uniqueToken
-                ])->setStatusCode(200);
+                return $JSONResponseHelper->successJSONResponse(['userId' => $user['id'],'token' => $uniqueToken]);
             }
 
         } else { // Invalid token
-            return response()->json([
-                'label' => "ERROR: Invalid client request",
-                'userId' => null,
-                'token' => null
-            ])->setStatusCode(400);
+            return $JSONResponseHelper->badRequestJSONResponse("Invalid client request");
         }
     }
 }

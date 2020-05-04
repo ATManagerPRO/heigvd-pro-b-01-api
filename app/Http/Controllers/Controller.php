@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomHelpers\JSONResponseHelper;
+use App\User;
+use http\Env\Response;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;

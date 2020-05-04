@@ -2,40 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomHelpers\JSONResponseHelper;
 use App\Folder;
 use App\GoalTodo;
 use App\Todo;
 use App\TodoList;
 use App\Goal;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+    private $JSONResponseHelper;
+
+    public function __construct() {
+        $this->JSONResponseHelper = new JSONResponseHelper();
+    }
+
     /**
      * Display a JSON listing all todolists linked to a specific user.
      * The json will display at the beginning all todolists without folder
      * and after, all user's folder with their linked todolists
      *
-     * @return array jsonArray
+     * @return JsonResponse The JsonResponse
      */
-    public function todolists($id)
+    public function todolists($userId)
     {
-        $todolistsWithoutFolder = TodoList::where(['user_id' => $id, 'folder_id' => null])->get();
-        $foldersContainsTodolists = Folder::where('user_id', $id)->with("todolist")->get();
+        $todolistsWithoutFolder = TodoList::where(['user_id' => $userId, 'folder_id' => null])->get();
+        $foldersContainsTodolists = Folder::where('user_id', $userId)->with("todolist")->get();
 
-        $array = [
+        $resource = [
             "todoLists" => $todolistsWithoutFolder,
             "folders" => $foldersContainsTodolists,
         ];
 
-        return $array;
+        return $this->JSONResponseHelper->successJSONResponse($resource);
     }
 
     /**
      * Returns all todos a given user
      * @param $userId
-     * @return array jsonArray
+     * @return JsonResponse The JsonResponse
      */
     public function todos($userId){
 
@@ -59,21 +68,21 @@ class UserController extends Controller
 
         }
 
-        $result = [
+        $resource = [
             "todos" => $allTodos
         ];
 
-        return $result;
+        return $this->JSONResponseHelper->successJSONResponse($resource);
     }
 
     /**
      * Returns all todos a given user for today
-     * @param $id
-     * @return array jsonArray
+     * @param $userId
+     * @return JsonResponse The JsonResponse
      */
-    public function todosToday($id){
+    public function todosToday($userId){
 
-        $todoLists = TodoList::select('id')->where(['user_id' => $id])->get()->toArray();
+        $todoLists = TodoList::select('id')->where(['user_id' => $userId])->get()->toArray();
 
         $array = [];
 
@@ -97,38 +106,38 @@ class UserController extends Controller
 
         }
 
-        $result = [
+        $resource = [
             "todos" => $array
         ];
 
-        return $result;
+        return $this->JSONResponseHelper->successJSONResponse($resource);
     }
 
     /**
      * Returns all the goals a given user
-     * @param $id
-     * @return array jsonArray
+     * @param $userId
+     * @return JsonResponse The JsonResponse
      */
-    public function goals($id)
+    public function goals($userId)
     {
-        $goals = Goal::where('user_id', $id)->get();
+        $goals = Goal::where('user_id', $userId)->get();
 
-        $array = [
+        $resource = [
             "goals" => $goals,
         ];
 
-        return $array;
+        return $this->JSONResponseHelper->successJSONResponse($resource);
     }
 
     /**
      * Returns all goalTodos a given user for today
-     * @param $id
-     * @return array jsonArray
+     * @param $userId
+     * @return JsonResponse The JsonResponse
      */
-    public function goalTodosToday($id){
+    public function goalTodosToday($userId){
 
-        $goals = Goal::select('id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
-            ->where(['user_id' => $id])->with('interval')->get()->toArray();
+        $goals = Goal::select('id AS goal_id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
+            ->where(['user_id' => $userId])->with('interval')->get()->toArray();
 
         $array = [];
 
@@ -136,7 +145,7 @@ class UserController extends Controller
         foreach ($goals as $goal){
 
             $goalTodos = GoalTodo::
-                where(['goal_id' => $goal['id']])->
+                where(['goal_id' => $goal['goal_id']])->
                 where(DB::raw("DATE(goal_todos.dueDate)"), "=", date('Y-m-d'))->
                 get()->
                 toArray();
@@ -152,21 +161,21 @@ class UserController extends Controller
 
         }
 
-        $result = [
+        $resource = [
             "goalTodos" => $array
         ];
 
-        return $result;
+        return $this->JSONResponseHelper->successJSONResponse($resource);
     }
 
     /**
      * Returns all goalTodos a given user for today
      * @param $userId
-     * @return array jsonArray
+     * @return JsonResponse The JsonResponse
      */
     public function goalTodos($userId){
 
-        $goals = Goal::select('id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
+        $goals = Goal::select('id AS goal_id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
             ->where(['user_id' => $userId])->with('interval')->get()->toArray();
 
         $allGoalTodos = [];
@@ -175,7 +184,7 @@ class UserController extends Controller
         foreach ($goals as $goal){
 
             $goalTodos = GoalTodo::
-                where(['goal_id' => $goal['id']])->
+                where(['goal_id' => $goal['goal_id']])->
                 get()->
                 toArray();
 
@@ -190,11 +199,11 @@ class UserController extends Controller
 
         }
 
-        $result = [
+        $resource = [
             "goalTodos" => $allGoalTodos
         ];
 
-        return $result;
+        return $this->JSONResponseHelper->successJSONResponse($resource);
     }
 
 }
