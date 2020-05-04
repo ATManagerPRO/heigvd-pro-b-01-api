@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\CustomHelpers;
-
 
 use App\User;
 use Illuminate\Http\Request;
@@ -22,7 +20,7 @@ class APIHelper
      */
     public function getUserByTokenAPI(Request $request){
         $tokenAPI = $request->bearerToken();
-        $user = User::select('id')->where(['authToken' => $tokenAPI])->first();
+        $user = User::select('id')->where(['tokenAPI' => $tokenAPI])->first();
 
         return $user;
     }

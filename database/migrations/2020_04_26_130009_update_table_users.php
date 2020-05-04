@@ -16,7 +16,7 @@ class UpdateTableUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('googleToken', 'googleId');
             $table->renameColumn('pseudo', 'email');
-            $table->string('authToken', env("AUTH_TOKEN_LENGTH"));
+            $table->string('tokenAPI', env("AUTH_TOKEN_LENGTH"));
         });
     }
 
@@ -27,6 +27,10 @@ class UpdateTableUsers extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('users', function (Blueprint $table) {
+            $table->renameColumn('googleId', 'googleToken');
+            $table->renameColumn('email', 'pseudo');
+            $table->dropColumn('tokenAPI');
+        });
     }
 }
