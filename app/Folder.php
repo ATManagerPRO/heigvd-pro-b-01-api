@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Folder extends Model
 {
+
     /**
      * Get Folder's creator
      */

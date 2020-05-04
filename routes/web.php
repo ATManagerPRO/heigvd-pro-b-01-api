@@ -29,6 +29,9 @@ Route::group(['prefix' => 'api/v1/'], function () {
 
     // Auth
     Route::post('auth', ['uses' => 'GoogleAuthController@login']);
+
+    // Folders
+    Route::post('folders', ['uses' => 'FolderController@store']);
 });
 
 
