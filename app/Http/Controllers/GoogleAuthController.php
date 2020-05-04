@@ -86,7 +86,7 @@ class GoogleAuthController extends Controller
             }
 
         } else { // Invalid token
-            return $JSONResponseHelper->badRequestJSONResponse();
+            return $JSONResponseHelper->badRequestJSONResponse("Invalid client request");
         }
     }
 }

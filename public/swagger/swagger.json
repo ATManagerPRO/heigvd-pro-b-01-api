@@ -730,17 +730,26 @@
             "schema": {
               "type": "object",
               "properties": {
-                "label": {
-                  "type": "string",
-                  "example": "SUCCESS: Existing user"
-                },
-                "userId": {
+                "status code": {
                   "type": "integer",
-                  "example": 3
+                  "example": 200
                 },
-                "token": {
+                "message": {
                   "type": "string",
-                  "example": "0Jx2v4R8JNa8D64E2uVXSHGKwHsHpxNJ"
+                  "example": "Success"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "tokenAPI": {
+                      "type": "string",
+                      "example": "0Jx2v4R8JNa8D64E2uVXSHGKwHsHpxNJ"
+                    }
+                  }
                 }
               }
             }
@@ -750,17 +759,26 @@
             "schema": {
               "type": "object",
               "properties": {
-                "label": {
-                  "type": "string",
-                  "example": "SUCCESS: New user"
-                },
-                "userId": {
+                "status code": {
                   "type": "integer",
-                  "example": 4
+                  "example": 201
                 },
-                "token": {
+                "message": {
                   "type": "string",
-                  "example": "0Jx2v4R8JNa8D64E2uVXSHGKwHsHpxNJ"
+                  "example": "Created"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "tokenAPI": {
+                      "type": "string",
+                      "example": "0Jx2v4R8JNa8D64E2uVXSHGKwHsHpxNJ"
+                    }
+                  }
                 }
               }
             }
@@ -770,17 +788,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "label": {
-                  "type": "string",
-                  "example": "ERROR: Invalid client request"
-                },
-                "userId": {
+                "status code": {
                   "type": "integer",
-                  "example": null
+                  "example": 400
                 },
-                "token": {
+                "message": {
                   "type": "string",
-                  "example": null
+                  "example": "Invalid client request"
                 }
               }
             }
@@ -790,17 +804,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "label": {
-                  "type": "string",
-                  "example": "ERROR: Could not create secure API token"
-                },
-                "userId": {
+                "status code": {
                   "type": "integer",
-                  "example": null
+                  "example": 500
                 },
-                "token": {
+                "message": {
                   "type": "string",
-                  "example": null
+                  "example": "Could not create secure API token"
                 }
               }
             }

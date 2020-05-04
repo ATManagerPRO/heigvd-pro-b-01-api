@@ -7,9 +7,9 @@ use Illuminate\Http\JsonResponse;
 class JSONResponseHelper
 {
 
-    private $statusCodeStr = "Status code";
-    private $messageStr = "Message";
-    private $resourceStr = "Resource";
+    private $statusCodeStr = "status code";
+    private $messageStr = "message";
+    private $resourceStr = "resource";
 
     private $unauthorizedCode = 401;
     private $badRequestCode = 400;
@@ -35,10 +35,10 @@ class JSONResponseHelper
      * Return a well JSON 400 Response for bad request (wrong input, etc...)
      * @return JsonResponse JSON formatted Response
      */
-    public function badRequestJSONResponse(){
+    public function badRequestJSONResponse($message = "Bad request, verify your content"){
         return response()->json([
             $this->statusCodeStr => $this->badRequestCode,
-            $this->messageStr => "Bad request, verify your content"
+            $this->messageStr => $message
         ])->setStatusCode($this->badRequestCode);
     }
 
