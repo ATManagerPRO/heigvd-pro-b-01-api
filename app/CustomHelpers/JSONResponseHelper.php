@@ -14,6 +14,7 @@ class JSONResponseHelper
     private $unauthorizedCode = 401;
     private $badRequestCode = 400;
     private $createdCode = 201;
+    private $successCode = 200;
 
     public function __construct()
     {
@@ -51,6 +52,18 @@ class JSONResponseHelper
             $this->messageStr => "Created",
             $this->resourceStr => $resource
         ])->setStatusCode($this->createdCode);
+    }
+
+    /**
+     * Return a well JSON 200 Response for success
+     * @return JsonResponse JSON formatted Response
+     */
+    public function successJSONResponse($resource) {
+        return response()->json([
+            $this->statusCodeStr => $this->successCode,
+            $this->messageStr => "Success",
+            $this->resourceStr => $resource
+        ])->setStatusCode($this->successCode);
     }
 
     /**
