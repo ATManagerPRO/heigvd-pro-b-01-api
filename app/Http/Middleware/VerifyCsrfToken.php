@@ -19,8 +19,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'http://atmanager.local/api/v1/auth', // Local testing
-        'http://atmanager.test/api/v1/auth', // Local testing
-        'https://atmanager.gollgot.app/'
+        'http://atmanager.local/api/v1/*', // Local testing
+        'http://atmanager.test/api/v1/*', // Local testing
+        'https://atmanager.gollgot.app/api/v1/*'
     ];
 }
