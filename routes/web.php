@@ -17,17 +17,15 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'api/v1/'], function () {
-    // Users
+    // User todos
     Route::get('users/{user}/todolists', ['uses' => 'UserController@todolists']);
-    Route::get('users/{user}/goals', ['uses' => 'UserController@goals']);
+    Route::get('users/{user}/todos', ['uses' => 'UserController@todos']);
     Route::get('users/{user}/todos/today', ['uses' => 'UserController@todosToday']);
+
+    // User goals
+    Route::get('users/{user}/goals', ['uses' => 'UserController@goals']);
+    Route::get('users/{user}/goaltodos', ['uses' => 'UserController@goalTodos']);
     Route::get('users/{user}/goaltodos/today', ['uses' => 'UserController@goaltodosToday']);
-
-    // Todolists
-    Route::get('todolists/{todolist}/todos', ['uses' => 'TodolistController@todos']);
-
-    // Goals
-    Route::get('goals/{goal}/goaltodos', ['uses' => 'GoalController@goaltodos']);
 
     // Auth
     Route::post('auth', ['uses' => 'GoogleAuthController@login']);
