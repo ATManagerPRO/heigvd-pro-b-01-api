@@ -136,7 +136,7 @@ class UserController extends Controller
      */
     public function goalTodosToday($userId){
 
-        $goals = Goal::select('id AS goal_id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
+        $goals = Goal::select('id AS goal_id', 'label', 'endDate AS endDate_goal', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
             ->where(['user_id' => $userId])->with('interval')->get()->toArray();
 
         $array = [];
@@ -175,7 +175,7 @@ class UserController extends Controller
      */
     public function goalTodos($userId){
 
-        $goals = Goal::select('id AS goal_id', 'label', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
+        $goals = Goal::select('id AS goal_id', 'label', 'endDate AS endDate_goal', 'quantity', 'intervalValue', 'interval_id', 'created_at AS created_at_goal')
             ->where(['user_id' => $userId])->with('interval')->get()->toArray();
 
         $allGoalTodos = [];

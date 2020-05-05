@@ -496,6 +496,10 @@
                             "type": "string",
                             "example": "Faire du sport"
                           },
+                          "endDate_goal": {
+                            "type": "string",
+                            "example": "2020-12-31"
+                          },
                           "quantity": {
                             "type": "integer",
                             "example": 20
@@ -701,69 +705,86 @@
             "schema": {
               "type": "object",
               "properties": {
-                "goalTodos": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "example": 4
-                      },
-                      "goal_id": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "quantityDone": {
-                        "type": "integer",
-                        "example": null
-                      },
-                      "dateTimeDone": {
-                        "type": "string",
-                        "example": null
-                      },
-                      "dueDate": {
-                        "type": "string",
-                        "example": "2020-04-20 22:00:00"
-                      },
-                      "created_at": {
-                        "type": "string",
-                        "example": "2020-04-15 15:14:04"
-                      },
-                      "updated_at": {
-                        "type": "string",
-                        "example": "2020-04-15 15:14:04"
-                      },
-                      "label": {
-                        "type": "string",
-                        "example": "Faire du sport"
-                      },
-                      "quantity": {
-                        "type": "integer",
-                        "example": 2
-                      },
-                      "intervalValue": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "interval_id": {
-                        "type": "integer",
-                        "example": 2
-                      },
-                      "created_at_goal": {
-                        "type": "string",
-                        "example": "2020-04-14 15:14:04"
-                      },
-                      "interval": {
+                "status code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "goalTodos": {
+                      "type": "array",
+                      "items": {
                         "type": "object",
                         "properties": {
                           "id": {
                             "type": "integer",
-                            "example": 2
+                            "example": 4
+                          },
+                          "goal_id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "quantityDone": {
+                            "type": "integer",
+                            "example": null
+                          },
+                          "dateTimeDone": {
+                            "type": "string",
+                            "example": null
+                          },
+                          "dueDate": {
+                            "type": "string",
+                            "example": "2020-04-30 22:00:00"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "example": "2020-04-15 15:14:04"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "example": "2020-04-15 15:14:04"
                           },
                           "label": {
                             "type": "string",
-                            "example": "week"
+                            "example": "Faire du sport"
+                          },
+                          "endDate_goal": {
+                            "type": "string",
+                            "example": "2020-12-31"
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "example": 20
+                          },
+                          "intervalValue": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "interval_id": {
+                            "type": "integer",
+                            "example": 2
+                          },
+                          "created_at_goal": {
+                            "type": "string",
+                            "example": "2020-05-03 12:16:51"
+                          },
+                          "interval": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "example": 2
+                              },
+                              "label": {
+                                "type": "string",
+                                "example": "week"
+                              }
+                            }
                           }
                         }
                       }
