@@ -35,6 +35,9 @@ Route::group(['prefix' => 'api/v1/'], function () {
 
     // Folders
     Route::post('folders', ['uses' => 'FolderController@store']);
+
+    // Todolist
+    Route::post('todolists', ['uses' => 'TodolistController@store']);
 });
 
 
