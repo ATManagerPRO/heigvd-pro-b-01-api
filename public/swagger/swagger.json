@@ -24,6 +24,11 @@
     "/users/{user_id}/todolists": {
       "get": {
         "summary": "Returns all todolists and folders of a given user.",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -147,6 +152,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "The given API token cannot grant authorization.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
           }
         }
       }
@@ -154,6 +175,11 @@
     "/users/{user_id}/goals": {
       "get": {
         "summary": "Returns all goals of given user.",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -289,6 +315,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "The given API token cannot grant authorization.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
           }
         }
       }
@@ -296,6 +338,11 @@
     "/users/{user_id}/todos/today": {
       "get": {
         "summary": "Returns all user's todos for today",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -435,6 +482,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "The given API token cannot grant authorization.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
           }
         }
       }
@@ -442,6 +505,11 @@
     "/users/{user_id}/goaltodos/today": {
       "get": {
         "summary": "Returns all user's goaltodos for today.",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -546,6 +614,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "The given API token cannot grant authorization.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
           }
         }
       }
@@ -553,6 +637,11 @@
     "/users/{user_id}/todos": {
       "get": {
         "summary": "Returns all todos of a given user.",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -692,6 +781,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "The given API token cannot grant authorization.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
           }
         }
       }
@@ -699,6 +804,11 @@
     "/users/{user_id}/goaltodos": {
       "get": {
         "summary": "Returns all goaltodos of a given user.",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -800,6 +910,22 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The given API token cannot grant authorization.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
                 }
               }
             }
