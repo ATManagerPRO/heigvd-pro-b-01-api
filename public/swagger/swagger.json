@@ -1049,7 +1049,6 @@
             "name": "label",
             "required": true,
             "type": "string",
-            "minimum": 1,
             "description": "The folder name"
           }
         ],
@@ -1077,6 +1076,111 @@
                     "user_id": {
                       "type": "integer",
                       "example": 1
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2020-05-07 08:00:43"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2020-05-07 08:00:43"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "example": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, maybe error in parameters (field length, empty field, ...)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Bad request, verify your content"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing bearer tokenAPI or wrong tokenAPI",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todolists": {
+      "post": {
+        "summary": "Create a new todolist",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "title",
+            "required": true,
+            "type": "string",
+            "description": "The todolist title"
+          },
+          {
+            "in": "formData",
+            "name": "folder_id",
+            "required": false,
+            "type": "integer",
+            "description": "The folder id that will contains the todolist"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created new folder",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 201
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Created"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "example": "Homework"
+                    },
+                    "user_id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "folder_id": {
+                      "type": "integer",
+                      "example": 3
                     },
                     "updated_at": {
                       "type": "string",
