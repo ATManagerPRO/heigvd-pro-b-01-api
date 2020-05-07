@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CustomHelpers\JSONResponseHelper;
+use App\TodoList;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -61,21 +62,18 @@ class GoogleAuthController extends Controller
 
             if (empty($user)) { // User doesn't exist which means it's his first login
                 // => insert in database
-                $newUserId = DB::table('users')->insertGetId([
-                    'googleId' => $userId,
-                    'email' => $payLoad['email'],
-                    'tokenAPI' => $uniqueToken,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
+                $newUser = new User;
+                $newUser->googleId = $userId;
+                $newUser->email = $payLoad['email'];
+                $newUser->tokenAPI = $uniqueToken;
+                $newUser->save();
+                $newUserId = $newUser->getAttributeValue('id');
 
                 // Create default todolist
-                DB::table('todo_lists')->insert([
-                    'user_id' => $newUserId,
-                    'title' => 'My Tasks',
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
+                $newDefaultList = new TodoList;
+                $newDefaultList->user_id = $newUserId;
+                $newDefaultList->title = "My Tasks";
+                $newDefaultList->save();
 
                 return $JSONResponseHelper->createdJSONResponse(['userId' => $newUserId, 'tokenAPI' => $uniqueToken]);
 
