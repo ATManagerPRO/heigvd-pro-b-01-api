@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use App\CustomHelpers\APIHelper;
 use App\CustomHelpers\JSONResponseHelper;
 use App\Goal;
-use App\Interval;
-use DateTime;
+use App\GoalTodo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class GoalController extends Controller
+class GoalTodoController extends Controller
 {
 
     /**
-     * Store a new goal came from the POST request
+     * Store a new goaltodo came from the POST request
      * Request $request
      * @return JsonResponse jsonArray
      */
@@ -33,25 +32,25 @@ class GoalController extends Controller
         // User authorized
         else{
 
-            // Fetch the interval object that match the intervalLabel that comes from the request input
-            $interval = Interval::where('label', $request->input('intervalLabel'))->first();
-            // Interval must be correct
-            if(empty($interval)){
+            // Fetch the goal matches with the goal label from the request and the connected user
+            // (because we can only add a goaltodo to a goal of the current user)
+            $goal = Goal::where(['label' =>$request->input('goalLabel'), 'user_id' => $connectedUser->getAttributes()['id']])->first();
+
+            // Linked goal must be correct
+            if(empty($goal)){
                 return $JSONResponseHelper->badRequestJSONResponse();
             }
 
             try {
-                $goal = new Goal();
-                $goal->label = $request->input("label");
-                $goal->quantity = $request->input("quantity");
-                $goal->intervalValue = $request->input("intervalValue");
-                $goal->endDate = $request->input("endDate");
-                $goal->interval()->associate($interval);
-                $goal->user()->associate($connectedUser);
+                $goalTodo = new GoalTodo();
+                $goalTodo->quantityDone = $request->input('quantityDone');
+                $goalTodo->dateTimeDone = $request->input('dateTimeDone');
+                $goalTodo->dueDate = $request->input('dueDate');
+                $goalTodo->goal()->associate($goal);
 
-                $goal->save();
+                $goalTodo->save();
 
-                return $JSONResponseHelper->createdJSONResponse($goal->getAttributes());
+                return $JSONResponseHelper->createdJSONResponse($goalTodo->getAttributes());
 
             }catch(\Exception $e){
                 // Error occurred
