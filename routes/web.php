@@ -32,14 +32,14 @@ Route::group(['prefix' => 'api/v1/'], function () {
 
     // Google sign-in
     Route::post('auth', ['uses' => 'GoogleAuthController@login']);
-
     // Folders
     Route::post('folders', ['uses' => 'FolderController@store']);
-
     // Todolist
     Route::post('todolists', ['uses' => 'TodolistController@store']);
-
+    // Goal
     Route::post('goals', ['uses' => 'GoalController@store']);
+    // GoalTodo
+    Route::post('goaltodos', ['uses' => 'GoalTodoController@store']);
 });
 
 
