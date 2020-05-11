@@ -45,7 +45,6 @@ class GoalController extends Controller
                 $goal->label = $request->input("label");
                 $goal->quantity = $request->input("quantity");
                 $goal->intervalValue = $request->input("intervalValue");
-                //$goal->endDate = DateTime::createFromFormat('Y-m-d', $request->input("endDate"));
                 $goal->endDate = $request->input("endDate");
                 $goal->interval()->associate($interval);
                 $goal->user()->associate($connectedUser);
@@ -54,29 +53,10 @@ class GoalController extends Controller
 
                 return $JSONResponseHelper->createdJSONResponse($goal->getAttributes());
 
-                //dd($goal);
             }catch(\Exception $e){
                 // Error occurred
                 return $JSONResponseHelper->badRequestJSONResponse();
             }
-
-
-            /*
-            try {
-                $todoList = new TodoList();
-                $todoList->title = $request->input('title');
-                $todoList->author()->associate($connectedUser);
-                $todoList->folder()->associate($folder);
-
-                $todoList->save();
-
-                //Success
-                return $JSONResponseHelper->createdJSONResponse($todoList->getAttributes());
-            }catch(\Exception $e){
-                // Error
-                return $JSONResponseHelper->badRequestJSONResponse();
-            }
-            */
 
         }
     }
