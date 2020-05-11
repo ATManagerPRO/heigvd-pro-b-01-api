@@ -17,21 +17,27 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'api/v1/'], function () {
-    // User todos
-    Route::get('users/{user}/todolists', ['uses' => 'UserController@todolists']);
-    Route::get('users/{user}/todos', ['uses' => 'UserController@todos']);
-    Route::get('users/{user}/todos/today', ['uses' => 'UserController@todosToday']);
+    // User GET
+    Route::group(['middleware' => ['authTokenGET'], 'prefix' => 'users/{user}/'], function () {
+        // User todos
+        Route::get('todolists', ['uses' => 'UserController@todolists']);
+        Route::get('todos', ['uses' => 'UserController@todos']);
+        Route::get('todos/today', ['uses' => 'UserController@todosToday']);
 
-    // User goals
-    Route::get('users/{user}/goals', ['uses' => 'UserController@goals']);
-    Route::get('users/{user}/goaltodos', ['uses' => 'UserController@goalTodos']);
-    Route::get('users/{user}/goaltodos/today', ['uses' => 'UserController@goaltodosToday']);
+        // User goals
+        Route::get('goals', ['uses' => 'UserController@goals']);
+        Route::get('goaltodos', ['uses' => 'UserController@goalTodos']);
+        Route::get('goaltodos/today', ['uses' => 'UserController@goaltodosToday']);
+    });
 
-    // Auth
+    // Google sign-in
     Route::post('auth', ['uses' => 'GoogleAuthController@login']);
 
     // Folders
     Route::post('folders', ['uses' => 'FolderController@store']);
+
+    // Todolist
+    Route::post('todolists', ['uses' => 'TodolistController@store']);
 });
 
 
