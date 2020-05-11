@@ -38,6 +38,8 @@ Route::group(['prefix' => 'api/v1/'], function () {
 
     // Todolist
     Route::post('todolists', ['uses' => 'TodolistController@store']);
+
+    Route::post('goals', ['uses' => 'GoalController@store']);
 });
 
 

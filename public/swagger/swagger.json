@@ -1233,6 +1233,144 @@
           }
         }
       }
+    },
+    "/goals": {
+      "post": {
+        "summary": "Create a new goal",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "intervalLabel",
+            "required": true,
+            "type": "string",
+            "description": "The interval label [day, week, month, year]"
+          },
+          {
+            "in": "formData",
+            "name": "label",
+            "required": true,
+            "type": "string",
+            "description": "The goal label"
+          },
+          {
+            "in": "formData",
+            "name": "quantity",
+            "required": true,
+            "type": "integer",
+            "description": "The goal quantity"
+          },
+          {
+            "in": "formData",
+            "name": "intervalValue",
+            "required": true,
+            "type": "integer",
+            "description": "The interval value"
+          },
+          {
+            "in": "formData",
+            "name": "endDate",
+            "required": true,
+            "type": "string",
+            "description": "The end date [format = 2020-05-22]"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created new goal",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 201
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Created"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 7
+                    },
+                    "user_id": {
+                      "type": "integer",
+                      "example": 5
+                    },
+                    "interval_id": {
+                      "type": "integer",
+                      "example": 2
+                    },
+                    "quantity": {
+                      "type": "integer",
+                      "example": 3
+                    },
+                    "label": {
+                      "type": "string",
+                      "example": "Faire du sport"
+                    },
+                    "endDate": {
+                      "type": "string",
+                      "example": "2020-05-21"
+                    },
+                    "intervalValue": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2020-04-15 15:14:04"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2020-04-15 15:14:04"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, maybe error in parameters (field length, empty field, ...)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Bad request, verify your content"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing bearer tokenAPI or wrong tokenAPI",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
