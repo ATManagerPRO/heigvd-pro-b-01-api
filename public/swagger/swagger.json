@@ -1371,6 +1371,129 @@
           }
         }
       }
+    },
+    "/goaltodos": {
+      "post": {
+        "summary": "Create a new goal todo",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "goalLabel",
+            "required": true,
+            "type": "string",
+            "description": "The goal label [must exists and was created by the requested user]"
+          },
+          {
+            "in": "formData",
+            "name": "dueDate",
+            "required": true,
+            "type": "string",
+            "description": "The due date time [format = 2020-05-11 21:23:00]"
+          },
+          {
+            "in": "formData",
+            "name": "quantityDone",
+            "required": false,
+            "type": "integer",
+            "description": "The quantity done"
+          },
+          {
+            "in": "formData",
+            "name": "dateTimeDone",
+            "required": false,
+            "type": "string",
+            "description": "The date time done [format = 2020-05-11 21:23:00]"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created new goal todo",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 201
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Created"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "quantityDone": {
+                      "type": "integer",
+                      "example": 12
+                    },
+                    "dateTimeDone": {
+                      "type": "string",
+                      "example": "2020-05-11 21:00:00"
+                    },
+                    "dueDate": {
+                      "type": "string",
+                      "example": "2020-05-11 21:23:00"
+                    },
+                    "goal_id": {
+                      "type": "integer",
+                      "example": 7
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2020-04-15 15:14:04"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2020-04-15 15:14:04"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "example": 11
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, maybe error in parameters (field length, empty field, ...)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Bad request, verify your content"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing bearer tokenAPI or wrong tokenAPI",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
