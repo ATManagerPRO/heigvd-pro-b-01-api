@@ -40,6 +40,8 @@ Route::group(['prefix' => 'api/v1/'], function () {
     Route::post('goals', ['uses' => 'GoalController@store']);
     // GoalTodo
     Route::post('goaltodos', ['uses' => 'GoalTodoController@store']);
+    // Tag
+    Route::post('tags', ['uses' => 'TagController@store']);
 });
 
 
