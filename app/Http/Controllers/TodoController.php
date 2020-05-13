@@ -54,7 +54,8 @@ class TodoController extends Controller
                 }
 
                 //Success
-                return $JSONResponseHelper->createdJSONResponse($todo->getAttributes()); // TODO send back tags as well
+                // Retrieve created item once again in order to get all fields as well as its tags
+                return $JSONResponseHelper->createdJSONResponse(Todo::where('id', $todo['id'])->with('tags')->get());
             }catch(\Exception $e){
                 // Error
                 return $JSONResponseHelper->badRequestJSONResponse();
