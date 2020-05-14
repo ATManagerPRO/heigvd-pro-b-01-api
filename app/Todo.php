@@ -35,6 +35,6 @@ class Todo extends Model
      */
     public function interval()
     {
-        return $this->hasOne('App\Interval');
+        return $this->belongsTo('App\Interval');
     }
 }
