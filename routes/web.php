@@ -21,6 +21,7 @@ Route::group(['prefix' => 'api/v1/'], function () {
     Route::group(['middleware' => ['authTokenGET'], 'prefix' => 'users/{user}/'], function () {
         // User todos
         Route::get('todolists', ['uses' => 'UserController@todolists']);
+        Route::get('todolists/shared', ['uses' => 'UserController@todolistsShared']);
         Route::get('todos', ['uses' => 'UserController@todos']);
         Route::get('todos/today', ['uses' => 'UserController@todosToday']);
 

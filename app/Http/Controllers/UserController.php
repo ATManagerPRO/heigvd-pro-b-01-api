@@ -9,6 +9,7 @@ use App\Tag;
 use App\Todo;
 use App\TodoList;
 use App\Goal;
+use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +41,33 @@ class UserController extends Controller
         ];
 
         return $this->JSONResponseHelper->successJSONResponse($resource);
+    }
+
+    public function todolistsShared($userId)
+    {
+        // Fetch the User object correspond to the user we want to display their shared todolist / todos
+        $connectedUser = User::where(['id'=>$userId])->first();
+        // Fetch the shared todolists for the user
+        $todoListsInvited = $connectedUser->todosListInvited->toArray();
+        // Create a custom array that will contains all shared todolists with their todos
+        $todolistArray = [];
+        foreach($todoListsInvited as $todoList){
+            $todos = Todo::where('todo_list_id', $todoList['id'])->get()->toArray();
+            $todoList["todos"] = $todos;
+            array_push($todolistArray, $todoList);
+        }
+
+        // Result array, we create a "ghost" folder that is not in the DB, just for the front end need
+        $result = [
+            "folder" => [
+                "id" => -1,
+                "user_id" => $userId,
+                "label" => "Listes partagées",
+                "todolist" => $todolistArray
+            ]
+        ];
+
+        return $this->JSONResponseHelper->successJSONResponse($result);
     }
 
     /**
