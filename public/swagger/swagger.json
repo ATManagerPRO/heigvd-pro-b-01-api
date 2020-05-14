@@ -1620,9 +1620,9 @@
           },
           {
             "in": "formData",
-            "name": "interval_id",
+            "name": "intervalLabel",
             "type": "string",
-            "description": "The ID of the interval unit scale at which the todo should repeat itself (1, 2, 3 or 4 for day, week, month or year, respectively)"
+            "description": "The interval unit scale at which the todo should repeat itself [day | week | month | year]"
           },
           {
             "in": "formData",

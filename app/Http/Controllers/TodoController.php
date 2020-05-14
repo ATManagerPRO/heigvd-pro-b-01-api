@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CustomHelpers\APIHelper;
 use App\CustomHelpers\JSONResponseHelper;
+use App\Interval;
 use App\Tag;
 use App\Todo;
 use App\TodoList;
@@ -31,26 +32,30 @@ class TodoController extends Controller
         } else {
             try {
 
+                // Fetch the interval and todolists objects that match the intervalLabel and todo_list_id
+                $interval = Interval::where('label', $request->input('intervalLabel'))->first();
                 $todoList = TodoList::find($request->input('todo_list_id'));
 
                 $todo = new Todo();
                 $todo->title = $request->input('title');
                 $todo->details = $request->input('details', null);
-                $todo->interval_id = $request->input('interval_id', null); // TODO use label instead of id
                 $todo->intervalValue = $request->input('intervalValue', null);
                 $todo->intervalEndDate = $request->input('intervalEndDate', null);
                 $todo->favorite = 0;
                 $todo->dueDate = $request->input('dueDate', null);
                 $todo->reminderDateTime = $request->input('reminderDateTime', null);
                 $todo->todoList()->associate($todoList);
+                $todo->interval()->associate($interval);
 
                 $todo->save();
 
                 // Associate all given tags which must exist
                 $tags = $request->input('tags');
-                foreach($tags as $tagLabel) {
-                    $tag = Tag::select('id')->where('label', $tagLabel)->where('user_id', $connectedUser['id'])->first();
-                    $todo->tags()->attach($tag);
+                if(!empty($tags)) {
+                    foreach($tags as $tagLabel) {
+                        $tag = Tag::select('id')->where('label', $tagLabel)->where('user_id', $connectedUser['id'])->first();
+                        $todo->tags()->attach($tag);
+                    }
                 }
 
                 //Success
