@@ -14,17 +14,17 @@ class CreateTodoListUserTable extends Migration
     public function up()
     {
         // Pivot table between todo_lists and users
-        Schema::create('todoList_user', function (Blueprint $table) {
+        Schema::create('todo_list_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('todoList_id');
+            $table->unsignedBigInteger('todo_list_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedInteger('permissionLevel');
             $table->timestamps();
 
-            $table->unique(['todoList_id', 'user_id']);
+            $table->unique(['todo_list_id', 'user_id']);
 
             // Foreign keys constraints
-            $table->foreign('todoList_id')->references('id')->on('todo_lists')->onDelete('cascade');
+            $table->foreign('todo_list_id')->references('id')->on('todo_lists')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             // Table options
@@ -41,6 +41,6 @@ class CreateTodoListUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todoList_user');
+        Schema::dropIfExists('todo_list_user');
     }
 }

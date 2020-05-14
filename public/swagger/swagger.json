@@ -1814,6 +1814,92 @@
           }
         }
       }
+    },
+    "/todolists/{todolist_id}/share": {
+      "post": {
+        "summary": "Share a todolist that you own to an another user",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "todolist_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "description": "The todolist id that you own"
+          },
+          {
+            "in": "formData",
+            "name": "invitedEmail",
+            "required": true,
+            "type": "string",
+            "description": "The email of the user we want to invited"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Todo list successfully shared",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 201
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Created"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "todo list successfully shared"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, maybe you dont own the todolist, invited email not exists , ...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Bad request, verify your content"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing bearer tokenAPI or wrong tokenAPI",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

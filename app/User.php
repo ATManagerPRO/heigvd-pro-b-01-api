@@ -36,7 +36,7 @@ class User extends Model
      */
     public function todosListInvited()
     {
-        return $this->belongsToMany('App\TodoList');
+        return $this->belongsToMany('App\TodoList')->withTimestamps();
     }
 
     /**
