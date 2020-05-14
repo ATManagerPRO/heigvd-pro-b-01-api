@@ -1494,6 +1494,326 @@
           }
         }
       }
+    },
+    "/tags": {
+      "post": {
+        "summary": "Create a new tag",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "label",
+            "required": true,
+            "type": "string",
+            "description": "The tag label"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created new tag",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 201
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Created"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "example": "party"
+                    },
+                    "user_id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2020-05-07 08:00:43"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2020-05-07 08:00:43"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "example": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, maybe error in parameters (field length, empty field, ...)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Bad request, verify your content"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing bearer tokenAPI or wrong tokenAPI",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todos": {
+      "post": {
+        "summary": "Create a new todo and associates tags.",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "todo_list_id",
+            "required": true,
+            "type": "integer",
+            "description": "Todolist in which the todo will be created"
+          },
+          {
+            "in": "formData",
+            "name": "title",
+            "required": true,
+            "type": "string",
+            "description": "The todo's title"
+          },
+          {
+            "in": "formData",
+            "name": "details",
+            "type": "string",
+            "description": "Description of the todo"
+          },
+          {
+            "in": "formData",
+            "name": "interval_id",
+            "type": "string",
+            "description": "The ID of the interval unit scale at which the todo should repeat itself (1, 2, 3 or 4 for day, week, month or year, respectively)"
+          },
+          {
+            "in": "formData",
+            "name": "intervalValue",
+            "type": "integer",
+            "description": "The value N as in \"todo repeats every N week (whereas week is the interval_label)\""
+          },
+          {
+            "in": "formData",
+            "name": "intervalEndDate",
+            "type": "string",
+            "description": "When the interval ends"
+          },
+          {
+            "in": "formData",
+            "name": "dueDate",
+            "type": "string",
+            "description": "Date at which the user should have done the todo"
+          },
+          {
+            "in": "formData",
+            "name": "reminderDateTime",
+            "type": "string",
+            "description": "Date at which the user will receive a reminder about the todo"
+          },
+          {
+            "in": "formData",
+            "name": "tags",
+            "description": "The text labels of the tags that the new todo should be associated with.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created new todo",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 201
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Created"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 4
+                    },
+                    "todo_list_id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "user_id": {
+                      "type": "integer",
+                      "example": null
+                    },
+                    "interval_id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Homework"
+                    },
+                    "details": {
+                      "type": "string",
+                      "example": "Do all my homework for this day"
+                    },
+                    "dueDate": {
+                      "type": "string",
+                      "example": "2020-04-20 22:00:00"
+                    },
+                    "dateTimeDone": {
+                      "type": "string",
+                      "example": null
+                    },
+                    "reminderDateTime": {
+                      "type": "string",
+                      "example": null
+                    },
+                    "intervalValue": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "intervalEndDate": {
+                      "type": "string",
+                      "example": null
+                    },
+                    "favorite": {
+                      "type": "integer",
+                      "example": 0
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2020-04-15 15:14:04"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2020-04-15 15:14:04"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 5
+                          },
+                          "user_id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "label": {
+                            "type": "string",
+                            "example": "School"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "example": "2020-04-09 08:20:17"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "example": "2020-04-09 08:20:17"
+                          },
+                          "pivot": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "todo_id": {
+                                  "type": "integer",
+                                  "example": 4
+                                },
+                                "tag_id": {
+                                  "type": "integer",
+                                  "example": 3
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, maybe error in parameters (field length, empty field, ...)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Bad request, verify your content"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing bearer tokenAPI or wrong tokenAPI",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
