@@ -36,6 +36,8 @@ Route::group(['prefix' => 'api/v1/'], function () {
     Route::post('folders', ['uses' => 'FolderController@store']);
     // Todolist
     Route::post('todolists', ['uses' => 'TodolistController@store']);
+    // TodoList sharing
+    Route::post('todolists/{todolist}/share', ['uses' => 'TodolistController@share']);
     // Goal
     Route::post('goals', ['uses' => 'GoalController@store']);
     // GoalTodo

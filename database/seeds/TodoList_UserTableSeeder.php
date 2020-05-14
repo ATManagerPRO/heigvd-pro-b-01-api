@@ -12,27 +12,27 @@ class TodoList_UserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('todoList_user')->insert([
+        DB::table('todo_list_user')->insert([
             'id' => 1,
-            'todoList_id' => 3,
+            'todo_list_id' => 3,
             'user_id' => 1,
             'permissionLevel' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        DB::table('todoList_user')->insert([
+        DB::table('todo_list_user')->insert([
             'id' => 2,
-            'todoList_id' => 13,
+            'todo_list_id' => 13,
             'user_id' => 1,
             'permissionLevel' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        DB::table('todoList_user')->insert([
+        DB::table('todo_list_user')->insert([
             'id' => 3,
-            'todoList_id' => 12,
+            'todo_list_id' => 12,
             'user_id' => 1,
             'permissionLevel' => 0,
             'created_at' => now(),
