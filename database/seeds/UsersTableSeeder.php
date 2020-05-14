@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'id' => 2,
             'googleId' => Str::random(21),
-            'email' => 'sikiewz@gmail',
+            'email' => 'sikiewz@gmail.com',
             'tokenAPI' => Str::random(env("AUTH_TOKEN_LENGTH")),
             'created_at' => now(),
             'updated_at' => now(),

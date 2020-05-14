@@ -38,5 +38,14 @@ class TodoList_UserTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('todo_list_user')->insert([
+            'id' => 4,
+            'todo_list_id' => 3,
+            'user_id' => 4,
+            'permissionLevel' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
