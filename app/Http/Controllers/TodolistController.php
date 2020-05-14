@@ -54,6 +54,12 @@ class TodolistController extends Controller
         }
     }
 
+    /**
+     * Store into the pivot table a new shared todolist for a specific user
+     * @param $todoListId the todolist we want to share
+     * @param Request $request
+     * @return JsonResponse jsonArray
+     */
     public function share($todoListId, Request $request){
         // Fetch our custom helpers
         $APIHelper = new APIHelper();
