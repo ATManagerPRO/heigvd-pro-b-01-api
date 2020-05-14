@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CustomHelpers\JSONResponseHelper;
 use App\Folder;
 use App\GoalTodo;
+use App\Tag;
 use App\Todo;
 use App\TodoList;
 use App\Goal;
@@ -201,6 +202,22 @@ class UserController extends Controller
 
         $resource = [
             "goalTodos" => $allGoalTodos
+        ];
+
+        return $this->JSONResponseHelper->successJSONResponse($resource);
+    }
+
+    /**
+     * Return all tags for a specific user
+     * @param $userId
+     * @return JsonResponse
+     */
+    public function tags($userId)
+    {
+        $tags = Tag::where(['user_id' => $userId])->get();
+
+        $resource = [
+            "tags" => $tags,
         ];
 
         return $this->JSONResponseHelper->successJSONResponse($resource);

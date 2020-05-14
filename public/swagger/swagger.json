@@ -933,6 +933,93 @@
         }
       }
     },
+    "/users/{user_id}/tags": {
+      "get": {
+        "summary": "Returns all tags of a given user.",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "description": "The user id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A tags array",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "user_id": {
+                            "type": "integer",
+                            "example": 4
+                          },
+                          "label": {
+                            "type": "string",
+                            "example": "School"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "example": "2020-04-15 15:14:04"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "example": "2020-04-15 15:14:04"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The given API token cannot grant authorization.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/auth": {
       "post": {
         "summary": "Generate API authentication token from client Google Sign-in request. (Bearer googleToken needed)",
@@ -1620,9 +1707,9 @@
           },
           {
             "in": "formData",
-            "name": "intervalLabel",
+            "name": "interval_id",
             "type": "string",
-            "description": "The interval unit scale at which the todo should repeat itself [day | week | month | year]"
+            "description": "The ID of the interval unit scale at which the todo should repeat itself (1, 2, 3 or 4 for day, week, month or year, respectively)"
           },
           {
             "in": "formData",

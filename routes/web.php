@@ -28,6 +28,9 @@ Route::group(['prefix' => 'api/v1/'], function () {
         Route::get('goals', ['uses' => 'UserController@goals']);
         Route::get('goaltodos', ['uses' => 'UserController@goalTodos']);
         Route::get('goaltodos/today', ['uses' => 'UserController@goaltodosToday']);
+
+        // User tags
+        Route::get('tags', ['uses' => 'UserController@tags']);
     });
 
     // Google sign-in
