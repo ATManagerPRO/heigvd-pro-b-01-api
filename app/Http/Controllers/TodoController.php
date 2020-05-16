@@ -8,6 +8,7 @@ use App\Interval;
 use App\Tag;
 use App\Todo;
 use App\TodoList;
+use App\User;
 use Illuminate\Http\Request;
 
 class TodoController extends Controller
@@ -67,4 +68,75 @@ class TodoController extends Controller
             }
         }
     }
+
+    /**
+     * Update the favorite field for a Ttodo
+     * @param $todoId
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateFavorite($todoId, Request $request) {
+        // Fetch our custom helpers
+        $APIHelper = new APIHelper();
+        $JSONResponseHelper = new JSONResponseHelper();
+
+        $connectedUser = $APIHelper->getUserByTokenAPI($request);
+
+        // User unauthorized (i.e. wrong API token)
+        if(empty($connectedUser)) {
+            return $JSONResponseHelper->unauthorizedJSONResponse();
+        } else {
+            // Fetch the TTodo from url param
+            $todo = Todo::where('id', $todoId)->first();
+            // TTodo doesn't exists
+            if(empty($todo)){
+                return $JSONResponseHelper->badRequestJSONResponse();
+            }else{
+                // User doesn't have the right to update this Ttodo !
+                if(!$this->canUserUpdateTodo($connectedUser, $todo)){
+                    return $JSONResponseHelper->unauthorizedJSONResponse();
+                }
+                // User have right, go update
+                else{
+                    try{
+                        Todo::where('id', $todoId)->update(['favorite'=>$request->input('favorite')]);
+                        $updatedTodo = Todo::where('id', $todoId)->first()->toArray();
+                        return $JSONResponseHelper->successJSONResponse($updatedTodo);
+                    }catch(\Exception $e){
+                        // DB error
+                        return $JSONResponseHelper->badRequestJSONResponse();
+                    }
+                }
+            }
+
+        }
+    }
+
+    /**
+     * Check if the user can update the Ttodo or not,
+     * It can be update if :
+     * 1. The user is the author of the linked todoList
+     * 2. The linked todoList has been shared with the user
+     * @param $user User The user
+     * @param $todo Todo The todo
+     * @return bool True if the user can update the Ttodo, false otherwise
+     */
+    private function canUserUpdateTodo($user, $todo){
+        // Fetch linked todolist
+        $todoList = $todo->todoList;
+        $invitedUsers = $todoList->usersInvited;
+
+        $isInvited = false;
+        foreach($invitedUsers as $invitedUser){
+            if($invitedUser->getAttributes()['id'] == $user->getAttributes()['id']){
+                $isInvited = true;
+                break;
+            }
+        }
+
+        return $todoList['user_id'] == $user->getAttributes()['id'] || $isInvited;
+    }
+
 }
+
+
