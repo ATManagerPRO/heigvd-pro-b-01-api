@@ -51,6 +51,7 @@ Route::group(['prefix' => 'api/v1/'], function () {
     // Todo
     Route::post('todos', ['uses' => 'TodoController@store']);
     Route::patch('todos/{todo}/favorite', ['uses' => 'TodoController@updateFavorite']);
+    Route::patch('todos/{todo}/done', ['uses' => 'TodoController@updateDone']);
 });
 
 
