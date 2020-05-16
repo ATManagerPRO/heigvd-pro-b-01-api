@@ -70,7 +70,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Update the favorite field for a Ttodo
+     * Update the favorite field for a _todo
      * @param $todoId
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -85,7 +85,7 @@ class TodoController extends Controller
     }
 
     /**
-     * Update the dateTimeDone field for a Ttodo
+     * Update the dateTimeDone field for a _todo
      * @param $todoId
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -100,7 +100,24 @@ class TodoController extends Controller
     }
 
     /**
-     * Update a specific field of the Ttodo table
+     * Archived the current _todo -> we do soft delete, not really removed from db
+     * so we really update the DB archived field from 0 to 1.
+     * @param $todoId
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($todoId, Request $request){
+        // Fetch our custom helpers
+        $APIHelper = new APIHelper();
+
+        $connectedUser = $APIHelper->getUserByTokenAPI($request);
+
+        // We do soft delete so it's an update of the archived field from 0 to 1 :)
+        return $this->updateTodoField($connectedUser, $todoId,"archived", 1);
+    }
+
+    /**
+     * Update a specific field of the _todo table
      * @param $connectedUser
      * @param $todoId
      * @param $fieldName
@@ -113,13 +130,13 @@ class TodoController extends Controller
         if(empty($connectedUser)) {
             return $JSONResponseHelper->unauthorizedJSONResponse();
         } else {
-            // Fetch the TTodo from url param
+            // Fetch the _todo from url param
             $todo = Todo::where('id', $todoId)->first();
-            // TTodo doesn't exists
+            // _todo doesn't exists
             if(empty($todo)){
                 return $JSONResponseHelper->badRequestJSONResponse();
             }else{
-                // User doesn't have the right to update this Ttodo !
+                // User doesn't have the right to update this _todo !
                 if(!$this->canUserUpdateTodo($connectedUser, $todo)){
                     return $JSONResponseHelper->unauthorizedJSONResponse();
                 }
@@ -140,13 +157,13 @@ class TodoController extends Controller
     }
 
     /**
-     * Check if the user can update the Ttodo or not,
+     * Check if the user can update the _todo or not,
      * It can be update if :
      * 1. The user is the author of the linked todoList
      * 2. The linked todoList has been shared with the user
      * @param $user User The user
      * @param $todo Todo The todo
-     * @return bool True if the user can update the Ttodo, false otherwise
+     * @return bool True if the user can update the _todo, false otherwise
      */
     private function canUserUpdateTodo($user, $todo){
         // Fetch linked todolist

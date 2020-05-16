@@ -26,6 +26,7 @@ class CreateTodosTable extends Migration
             $table->unsignedInteger('intervalValue')->nullable(); // Amount (1,2, ...) of interval unit
             $table->date('intervalEndDate')->nullable();
             $table->boolean('favorite');
+            $table->boolean('archived')->default(0);
             $table->timestamps();
 
             // Foreign keys constraints
