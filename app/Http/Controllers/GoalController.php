@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\CustomHelpers\APIHelper;
 use App\CustomHelpers\JSONResponseHelper;
 use App\Goal;
+use App\GoalTodo;
 use App\Interval;
-use DateTime;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
