@@ -51,6 +51,13 @@ class GoalController extends Controller
 
                 $goal->save();
 
+                // Create first goaltodo
+                $firstGoalTodo = new GoalTodo();
+                $firstGoalTodo->dueDate = $request->input('beginDate');
+                $firstGoalTodo->goal()->associate($goal);
+
+                $firstGoalTodo->save();
+
                 return $JSONResponseHelper->createdJSONResponse($goal->getAttributes());
 
             }catch(\Exception $e){
