@@ -118,15 +118,20 @@ class GoalTodoController extends Controller
 
         try {
             // Calculate new dueDate
+            $goalEndDate = new DateTime($goal->endDate);
             $newDueDate = new DateTime($previousGoalTodo['dueDate']);
             $newDueDate->add(
                 new DateInterval('P' . $goal->getAttributeValue('intervalValue') . $intervalChar)
             );
 
-            $newGoalTodo = new GoalTodo();
-            $newGoalTodo->dueDate = $newDueDate->format('Y-m-d G:i:s');
-            $newGoalTodo->goal()->associate($goal);
-            $newGoalTodo->save();
+            if($newDueDate > $goalEndDate) { // End date has been reached => don't create next goalTodo
+                return $JSONResponseHelper->successJSONResponse("End date has been reached: no more goalTodo");
+            } else { // Create next goalTodo normally
+                $newGoalTodo = new GoalTodo();
+                $newGoalTodo->dueDate = $newDueDate->format('Y-m-d G:i:s');
+                $newGoalTodo->goal()->associate($goal);
+                $newGoalTodo->save();
+            }
 
             return $JSONResponseHelper->createdJSONResponse($newGoalTodo->getAttributes());
         } catch (\Exception $e) {
