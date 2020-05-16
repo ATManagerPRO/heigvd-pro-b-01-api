@@ -50,6 +50,7 @@ Route::group(['prefix' => 'api/v1/'], function () {
     Route::post('tags', ['uses' => 'TagController@store']);
     // Todo
     Route::post('todos', ['uses' => 'TodoController@store']);
+    Route::patch('todos/{todo}/favorite', ['uses' => 'TodoController@updateFavorite']);
 });
 
 
