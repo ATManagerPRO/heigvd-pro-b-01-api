@@ -78,10 +78,37 @@ class TodoController extends Controller
     public function updateFavorite($todoId, Request $request) {
         // Fetch our custom helpers
         $APIHelper = new APIHelper();
-        $JSONResponseHelper = new JSONResponseHelper();
 
         $connectedUser = $APIHelper->getUserByTokenAPI($request);
 
+        return $this->updateTodoField($connectedUser, $todoId,"favorite", $request->input("favorite"));
+    }
+
+    /**
+     * Update the dateTimeDone field for a Ttodo
+     * @param $todoId
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateDone($todoId, Request $request) {
+        // Fetch our custom helpers
+        $APIHelper = new APIHelper();
+
+        $connectedUser = $APIHelper->getUserByTokenAPI($request);
+
+        return $this->updateTodoField($connectedUser, $todoId,"dateTimeDone", $request->input("done"));
+    }
+
+    /**
+     * Update a specific field of the Ttodo table
+     * @param $connectedUser
+     * @param $todoId
+     * @param $fieldName
+     * @param $input
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function updateTodoField($connectedUser, $todoId, $fieldName, $input){
+        $JSONResponseHelper = new JSONResponseHelper();
         // User unauthorized (i.e. wrong API token)
         if(empty($connectedUser)) {
             return $JSONResponseHelper->unauthorizedJSONResponse();
@@ -99,7 +126,7 @@ class TodoController extends Controller
                 // User have right, go update
                 else{
                     try{
-                        Todo::where('id', $todoId)->update(['favorite'=>$request->input('favorite')]);
+                        Todo::where('id', $todoId)->update([$fieldName => $input]);
                         $updatedTodo = Todo::where('id', $todoId)->first()->toArray();
                         return $JSONResponseHelper->successJSONResponse($updatedTodo);
                     }catch(\Exception $e){
