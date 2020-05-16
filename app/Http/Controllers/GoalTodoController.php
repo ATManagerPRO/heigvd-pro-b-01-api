@@ -125,15 +125,15 @@ class GoalTodoController extends Controller
             );
 
             if($newDueDate > $goalEndDate) { // End date has been reached => don't create next goalTodo
-                return $JSONResponseHelper->successJSONResponse("End date has been reached: no more goalTodo");
-            } else { // Create next goalTodo normally
-                $newGoalTodo = new GoalTodo();
-                $newGoalTodo->dueDate = $newDueDate->format('Y-m-d G:i:s');
-                $newGoalTodo->goal()->associate($goal);
-                $newGoalTodo->save();
+                return $JSONResponseHelper->customJSONResponse(200,"End date has been reached: no more goalTodo");
             }
+            // Create next goalTodo normally
+            $newGoalTodo = new GoalTodo();
+            $newGoalTodo->dueDate = $newDueDate->format('Y-m-d G:i:s');
+            $newGoalTodo->goal()->associate($goal);
+            $newGoalTodo->save();
 
-            return $JSONResponseHelper->createdJSONResponse($newGoalTodo->getAttributes());
+            return $JSONResponseHelper->createdJSONResponse(GoalTodo::where('id', $newGoalTodo->id)->first()->toArray());
         } catch (\Exception $e) {
             // Error occurred
             return $JSONResponseHelper->badRequestJSONResponse('Could not create next goalTodo');

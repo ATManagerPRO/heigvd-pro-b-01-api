@@ -2463,6 +2463,125 @@
         }
       }
     },
+    "/goaltodos/{goaltodo_id}/done": {
+      "patch": {
+        "summary": "Update the dateTimeDone field of the goalTodo to current time and create the next goalTodo entry",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "goaltodo_id",
+            "required": true,
+            "type": "integer",
+            "minimum": 1,
+            "description": "The goalTodo id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully marked goalTodo; goal endDate has been reached, so no more goalTodo",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "End date has been reached: no more goalTodo"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Successfully marked goalTodo as completed and created next one (returned as ressource)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 201
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Created"
+                },
+                "resource": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 11
+                    },
+                    "goal_id": {
+                      "type": "integer",
+                      "example": 7
+                    },
+                    "quantityDone": {
+                      "type": "integer",
+                      "example": null
+                    },
+                    "dateTimeDone": {
+                      "type": "string",
+                      "example": null
+                    },
+                    "dueDate": {
+                      "type": "string",
+                      "example": "2020-05-19 21:23:00"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2020-04-15 15:14:04"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2020-04-19 21:23:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request, maybe error in parameters (field length, empty field, ...)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Bad request, verify your content"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, missing bearer tokenAPI, wrong tokenAPI or trying to modify an unauthorized todo",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status code": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/todos/{todo_id}": {
       "delete": {
         "summary": "Archived (delete) the todo",
