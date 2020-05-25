@@ -97,20 +97,19 @@ class GoalTodoController extends Controller
                     GoalTodo::where('id', $goalTodoId)
                         ->update(['dateTimeDone' => now(), 'quantityDone' => $request->input('quantity')]);
 
-                    // Create next goalTodo
-                    return $this->createNextGoalTodo($goal);
+                    return $JSONResponseHelper->customJSONResponse(200, "goalTodo marked as done");
                 }
             }
         }
     }
 
     /**
-     * Creates the next goalTodo of a goal, according to its set interval.
+     * Creates all the forthcoming goalTodos of a goal, according to its set interval.
      * Auth/permission verification should be operated before calling this function as it will perform anyway.
      * @param Goal $goal
      * @return JsonResponse
      */
-    private function createNextGoalTodo(Goal $goal) {
+    public static function createNextGoalTodo(Goal $goal) {
         $JSONResponseHelper = new JSONResponseHelper();
         $previousGoalTodo = GoalTodo::where(['goal_id' => $goal->getAttributeValue('id')])
             ->orderBy('created_at', 'desc')->first(); // Most recent goalTodo relative to the given goal
@@ -119,21 +118,25 @@ class GoalTodoController extends Controller
         try {
             // Calculate new dueDate
             $goalEndDate = new DateTime($goal->endDate);
-            $newDueDate = new DateTime($previousGoalTodo['dueDate']);
-            $newDueDate->add(
-                new DateInterval('P' . $goal->getAttributeValue('intervalValue') . $intervalChar)
-            );
+            $previousDueDate = new DateTime($previousGoalTodo['dueDate']);
 
-            if($newDueDate > $goalEndDate) { // End date has been reached => don't create next goalTodo
-                return $JSONResponseHelper->customJSONResponse(200,"End date has been reached: no more goalTodo");
+            while(true) { // Create all goalTodos until goal's endDate
+                $newDueDate = $previousDueDate->add(
+                    new DateInterval('P' . $goal->getAttributeValue('intervalValue') . $intervalChar)
+                );
+
+                if($newDueDate > $goalEndDate) { // End date has been reached => don't create next goalTodo and exit
+                    return $JSONResponseHelper->customJSONResponse(201, "Created all forthcoming goalTodos until endDate");
+                }
+
+                // Create next goalTodo normally
+                $newGoalTodo = new GoalTodo();
+                $newGoalTodo->dueDate = $newDueDate->format('Y-m-d G:i:s');
+                $newGoalTodo->goal()->associate($goal);
+                $newGoalTodo->save();
+
+                $previousDueDate = $newDueDate;
             }
-            // Create next goalTodo normally
-            $newGoalTodo = new GoalTodo();
-            $newGoalTodo->dueDate = $newDueDate->format('Y-m-d G:i:s');
-            $newGoalTodo->goal()->associate($goal);
-            $newGoalTodo->save();
-
-            return $JSONResponseHelper->createdJSONResponse(GoalTodo::where('id', $newGoalTodo->id)->first()->toArray());
         } catch (\Exception $e) {
             // Error occurred
             return $JSONResponseHelper->badRequestJSONResponse('Could not create next goalTodo');

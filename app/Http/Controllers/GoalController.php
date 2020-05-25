@@ -14,7 +14,7 @@ class GoalController extends Controller
 {
 
     /**
-     * Store a new goal came from the POST request
+     * Store a new goal came from the POST request and create all its goalTodos
      * Request $request
      * @return JsonResponse jsonArray
      */
@@ -55,8 +55,10 @@ class GoalController extends Controller
                 $firstGoalTodo = new GoalTodo();
                 $firstGoalTodo->dueDate = $request->input('beginDate');
                 $firstGoalTodo->goal()->associate($goal);
-
                 $firstGoalTodo->save();
+
+                // Create all goalTodos until endDate
+                GoalTodoController::createNextGoalTodo($goal);
 
                 return $JSONResponseHelper->createdJSONResponse($goal->getAttributes());
 
