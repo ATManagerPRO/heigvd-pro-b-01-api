@@ -15,7 +15,7 @@ class GoalController extends Controller
 
     /**
      * Store a new goal came from the POST request and create all its goalTodos
-     * Request $request
+     * @param Request $request
      * @return JsonResponse jsonArray
      */
     public function store(Request $request){

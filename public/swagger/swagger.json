@@ -1503,7 +1503,7 @@
     },
     "/goals": {
       "post": {
-        "summary": "Create a new goal",
+        "summary": "Create a new goal and all its goalTodos",
         "security": [
           {
             "Bearer": []
@@ -1555,7 +1555,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Successfully created new goal",
+            "description": "Created",
             "schema": {
               "type": "object",
               "properties": {
@@ -2483,7 +2483,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully marked goalTodo; goal endDate has been reached, so no more goalTodo",
+            "description": "Successfully marked goalTodo as done",
             "schema": {
               "type": "object",
               "properties": {
@@ -2493,56 +2493,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "End date has been reached: no more goalTodo"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successfully marked goalTodo as completed and created next one (returned as ressource)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status code": {
-                  "type": "integer",
-                  "example": 201
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Created"
-                },
-                "resource": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "example": 11
-                    },
-                    "goal_id": {
-                      "type": "integer",
-                      "example": 7
-                    },
-                    "quantityDone": {
-                      "type": "integer",
-                      "example": null
-                    },
-                    "dateTimeDone": {
-                      "type": "string",
-                      "example": null
-                    },
-                    "dueDate": {
-                      "type": "string",
-                      "example": "2020-05-19 21:23:00"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "example": "2020-04-15 15:14:04"
-                    },
-                    "updated_at": {
-                      "type": "string",
-                      "example": "2020-04-19 21:23:00"
-                    }
-                  }
+                  "example": "goalTodo marked as done"
                 }
               }
             }
