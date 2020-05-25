@@ -2465,7 +2465,7 @@
     },
     "/goaltodos/{goaltodo_id}/done": {
       "patch": {
-        "summary": "Update the dateTimeDone field of the goalTodo to current time and create the next goalTodo entry",
+        "summary": "Update the dateTimeDone field to current time and update quantityDone",
         "security": [
           {
             "Bearer": []
@@ -2479,6 +2479,13 @@
             "type": "integer",
             "minimum": 1,
             "description": "The goalTodo id"
+          },
+          {
+            "in": "path",
+            "name": "quantity",
+            "required": true,
+            "type": "integer",
+            "description": "Quantity that's been done"
           }
         ],
         "responses": {
