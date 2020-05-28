@@ -1,7 +1,6 @@
-![alt text](public/atm_logo_text.png)
+![ATManager logo](public/atm_logo_text.png)
 
 # About ATManager
-
 Another Task Manager is an Android application dedicated to the management of to-do lists. The user is able to create different lists and tasks and to manage them. Notifications will remind the user of upcoming deadlines and the user can use different views (one day, one week, one month, etc...) to keep track of his tasks. One of the main feature is the list sharing which allows users to share their content with each other.
 
 This software was developed as semester project (PRO) at HEIG-VD, academic year 2019-2020.
