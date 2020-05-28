@@ -379,7 +379,7 @@
                 "resource": {
                   "type": "object",
                   "properties": {
-                    "todolists": {
+                    "goals": {
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -419,66 +419,6 @@
                           "updated_at": {
                             "type": "string",
                             "example": "2020-04-15 15:14:04"
-                          }
-                        }
-                      }
-                    },
-                    "folders": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "example": 1
-                          },
-                          "user_id": {
-                            "type": "integer",
-                            "example": 1
-                          },
-                          "label": {
-                            "type": "string",
-                            "example": "My personal folder"
-                          },
-                          "created_at": {
-                            "type": "string",
-                            "example": "2020-04-15 15:14:04"
-                          },
-                          "updated_at": {
-                            "type": "string",
-                            "example": "2020-04-15 15:14:04"
-                          },
-                          "todolist": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "id": {
-                                  "type": "integer",
-                                  "example": 1
-                                },
-                                "user_id": {
-                                  "type": "integer",
-                                  "example": 1
-                                },
-                                "folder_id": {
-                                  "type": "integer",
-                                  "example": null
-                                },
-                                "title": {
-                                  "type": "string",
-                                  "example": "School work list"
-                                },
-                                "created_at": {
-                                  "type": "string",
-                                  "example": "2020-04-15 15:14:04"
-                                },
-                                "updated_at": {
-                                  "type": "string",
-                                  "example": "2020-04-15 15:14:04"
-                                }
-                              }
-                            }
                           }
                         }
                       }
